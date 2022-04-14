@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.7/theme-chalk/index.min.css" rel="stylesheet">
+  <style>
+    * {
+      list-style: none;
+      padding: 0px;
+      margin: 0px;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-color: #10aec2;
+    }
+
+    .cards {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      padding: 10px 100px;
+      margin-top: 30px;
+    }
+
+    .cards::after {
+      z-index: 9;
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      border-left: 2px dashed rgba(200, 200, 200, 0.5);
+    }
+
+    .item-card {
+      margin-left: 20px;
+    }
+
+    .item_time {
+      position: relative;
+      /* display: flex; */
+      /* flex-direction: column; */
+      border: 1px solid red;
+    }
+
+    .item_time::after {
+      z-index: 10;
+      position: absolute;
+      left: -25px;
+      bottom: -15px;
+      content: "";
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      background-color: #FFF3E5;
+      background: url(../static/image/calendar.png) no-repeat;
+      background-size: 10px;
+      /* box-shadow: 0 0 2px 6px #FFF3E5; */
+    }
+
+    .item_time_placeholder {
+      z-index: 10;
+      position: absolute;
+      content: "";
+      width: 10px;
+      height: 10px;
+      left: 96px;
+      top: -15px;
+      border-radius: 10px;
+      background-color: #bdbdbd;
+      box-shadow: 0 0 2px 6px #fff;
+    }
+
+    .bd {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='root'>
+    <div v-for="(oneVale, index) in listData">
+      <ul class="cards" v-if="true">
+        <div class="item_time_placeholder bd"></div>
+        <li class="item-card" v-for="(secondValue, secondKey, secondIndex) in oneVale">
+          <div class="item_time" v-if="thisYear === secondKey">{{secondKey | timeFormat('M-D')}}</div>
+          <div class="item_time" v-else>{{secondKey}}-{{secondKey | timeFormat('M-D')}}</div>
+          <div v-for="threeValue in secondValue" :key="threeValue.id">
+            <ul class="bd">
+              <div v-for="item in threeValue">
+                {{item}}
+              </div>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script src='https://cdn.bootcss.com/vue/2.5.16/vue.min.js'></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.7/index.min.js"></script>
+  <script>
+    const timeFormat = (value, formatType, full) => {
+      if (!value) return '';
+      var timestamp = new Date(Number(value))
+      var now = new Date()
+      var Y = timestamp.getFullYear();
+      var M = (timestamp.getMonth() + 1 < 10 ? '0' + (timestamp.getMonth() + 1) : timestamp.getMonth() + 1)
+      var D = (timestamp.getDate() < 10 ? '0' + timestamp.getDate() : timestamp.getDate())
+      var h = (timestamp.getHours() < 10 ? '0' + timestamp.getHours() : timestamp.getHours());
+      var m = (timestamp.getMinutes() < 10 ? '0' + timestamp.getMinutes() : timestamp.getMinutes());
+      var s = (timestamp.getSeconds() < 10 ? '0' + timestamp.getSeconds() : timestamp.getSeconds());
+      var nowY = now.getFullYear();
+      var nowM = (now.getMonth() + 1 < 10 ? '0' + (now.getMonth() + 1) : now.getMonth() + 1)
+      var nowD = (now.getDate() < 10 ? '0' + now.getDate() : now.getDate())
+      var date
+      date = Y + '-' + M + '-' + D + '  ' + h + ':' + m + ':' + s
+
+      if (formatType === 'Y-M-D') {
+        if (full) { // 不区分今日/昨日
+          date = Y + '-' + M + '-' + D
+        } else {
+          if (Y == nowY && M == nowM && D == nowD) {
+            date = '今日'
+          } else if (Y == nowY && M == nowM && D == nowD - 1) {
+            date = '昨日'
+          } else {
+            date = Y + '-' + M + '-' + D
+          }
+        }
+      } else if (formatType === 'Y-M') {
+        date = Y + '-' + M
+      } else if (formatType === 'h-m') {
+        date = h + ':' + m
+      } else if (formatType === 'h-m-s') {
+        date = h + ':' + m + ':' + s
+      } else if (formatType === 'M-D') {
+        date = M + '-' + D
+      } else if (formatType === 'Y-M-D-h-m') {
+        date = Y + '-' + M + '-' + D + '  ' + h + ':' + m
+      } else if (formatType === 'Y/M/D') {
+        date = Y + '/' + M + '/' + D
+      }
+      return date
+    }
+    new Vue({
+      el: '#root',
+      data: {
+        thisYear: '',
+        listData: []
+      },
+      mounted() {
+        this.remoteData()
+        this.thisYear = new Date().getFullYear();
+      },
+      filters: {
+        timeFormat(val, format) {
+          return window.$utils.timeFormat(val, format)
+        }
+      },
+      methods: {
+        remoteData() {
+          fetch("../static/data/activity.json")
+            .then(res => res.json())
+            .then(res => this.listData = res)
+        }
+      },
+    });
+  </script>
+</body>
+
+</html>
