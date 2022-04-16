@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='root'>
+    <div style="background-color: aqua;">
+      {{orignStatus}}
+    </div>
+
+    <div style="background-color: blue;">
+      <parent :list="list"></parent>
+    </div>
+  </div>
+  <script src='https://cdn.bootcss.com/vue/2.5.16/vue.min.js'></script>
+  <script>
+    const son = {
+      props: {
+        status: {
+          type: Number,
+          default: 1
+        },
+      },
+      template: `
+      <div>
+        <div v-if="status">^_^</div>
+        <div v-else>┭┮﹏┭┮</div>  
+      </div>
+      `
+    }
+    const parent = {
+      props: ['list'],
+      template: `
+      <div>
+        <ul>
+          <li v-for="father in list">
+            <div>
+              <li v-for="aitem in father.teaChapterTabDetailRes">
+                <div>
+                  <li v-for="(pitem,index) in aitem.teaTeachActivityResList">
+                    <div v-if="pitem.status!==0">
+                      <son :status="pitem.status"></son>
+                    </div>
+                    <div v-else>
+                      <son :status="pitem.status"></son>
+                      <button @click="fabu(index)">发布</button>
+                    </div>
+                  </li>
+                </div>
+              </li>
+            </div>
+          </li>
+        </ul>
+      </div>
+      `,
+      components: {
+        son
+      },
+      methods: {
+        fabu(index) {
+          this.$parent.changeStatus(index)
+        }
+      }
+    }
+
+    new Vue({
+      el: '#root',
+      data: {
+        list: [
+          { // 章
+            name: 'aa1',
+            teaChapterTabDetailRes: [ // 节
+              {
+                teaTeachActivityResList: [ // 节的活动与课件
+                  {
+                    status: 1
+                  },
+                  {
+                    status: 0
+                  },
+                  {
+                    status: 0
+                  }
+                ]
+              }
+            ]
+          },
+        ],
+      },
+      methods: {
+        changeStatus(index) {
+          this.list[0].teaChapterTabDetailRes[0].teaTeachActivityResList[index].status = 1
+        }
+      },
+      computed: {
+        orignStatus() {
+          return this.list[0].teaChapterTabDetailRes[0].teaTeachActivityResList[0].status
+        }
+      },
+      components: {
+        parent
+      }
+    });
+  </script>
+</body>
+
+</html>

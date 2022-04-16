@@ -7,79 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.7/theme-chalk/index.min.css" rel="stylesheet">
-  <style>
-    * {
-      list-style: none;
-      padding: 0px;
-      margin: 0px;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --bg-color: #10aec2;
-    }
-
-    .cards {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      padding: 10px 100px;
-      margin-top: 30px;
-    }
-
-    .cards::after {
-      z-index: 9;
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      border-left: 2px dashed rgba(200, 200, 200, 0.5);
-    }
-
-    .item-card {
-      margin-left: 20px;
-    }
-
-    .item_time {
-      position: relative;
-      /* display: flex; */
-      /* flex-direction: column; */
-      border: 1px solid red;
-    }
-
-    .item_time::after {
-      z-index: 10;
-      position: absolute;
-      left: -25px;
-      bottom: -15px;
-      content: "";
-      display: inline-block;
-      width: 30px;
-      height: 30px;
-      border-radius: 10px;
-      background-color: #FFF3E5;
-      background: url(../static/image/calendar.png) no-repeat;
-      background-size: 10px;
-      /* box-shadow: 0 0 2px 6px #FFF3E5; */
-    }
-
-    .item_time_placeholder {
-      z-index: 10;
-      position: absolute;
-      content: "";
-      width: 10px;
-      height: 10px;
-      left: 96px;
-      top: -15px;
-      border-radius: 10px;
-      background-color: #bdbdbd;
-      box-shadow: 0 0 2px 6px #fff;
-    }
-
-    .bd {
-      border: 1px solid black;
-    }
-  </style>
+  <link rel="stylesheet" href="./common.css">
 </head>
 
 <body>
@@ -88,9 +16,8 @@
       <ul class="cards" v-if="true">
         <div class="item_time_placeholder bd"></div>
         <li class="item-card" v-for="(secondValue, secondKey, secondIndex) in oneVale">
-          <div class="item_time" v-if="thisYear === secondKey">{{secondKey | timeFormat('M-D')}}</div>
-          <div class="item_time" v-else>{{secondKey}}-{{secondKey | timeFormat('M-D')}}</div>
-          <div v-for="threeValue in secondValue" :key="threeValue.id">
+          <div v-for="(threeValue,timeStamp,c) in secondValue" :key="threeValue.id">
+            <div class="item_time">{{secondKey}}-{{timeStamp | timeFormat('M-D')}}</div>
             <ul class="bd">
               <div v-for="item in threeValue">
                 {{item}}
@@ -123,7 +50,7 @@
       },
       methods: {
         remoteData() {
-          fetch("../static/data/activity.json")
+          fetch("../static/data/simple.json")
             .then(res => res.json())
             .then(res => this.listData = res)
         }

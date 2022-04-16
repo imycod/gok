@@ -16,17 +16,14 @@
       <ul class="cards" v-if="true">
         <div class="item_time_placeholder bd"></div>
         <li class="item-card" v-for="(secondValue, secondKey, secondIndex) in oneVale">
-          {{secondKey}}
-          <el-collapse v-model="activeNames" @change="handleChange">
-            <el-collapse-item class="item_time" :title="date(secondKey,timeStamp)"
-              v-for="(threeValue,timeStamp,c) in secondValue" :key="threeValue.id">
-              <ul class="bd">
-                <div v-for="item in threeValue">
-                  {{item.name}}
-                </div>
-              </ul>
-            </el-collapse-item>
-          </el-collapse>
+          <div v-for="(threeValue,timeStamp,c) in secondValue" :key="threeValue.id">
+            <div class="item_time">{{secondKey}}-{{timeStamp | timeFormat('M-D')}}</div>
+            <ul class="bd">
+              <div v-for="item in threeValue">
+                {{item}}
+              </div>
+            </ul>
+          </div>
         </li>
       </ul>
     </div>
@@ -50,7 +47,7 @@
       computed: {
         date() {
           return (val, timeStamp) => {
-            return val.replace('_','') + "-" + this.timeFormat(timeStamp, 'M-D')
+            return val + "-" + this.timeFormat(timeStamp, 'M-D')
           }
         }
       },
@@ -64,24 +61,22 @@
         remoteData() {
           fetch("../static/data/activity.json")
             .then(res => res.json())
-            .then(arr => this.listData = this.handleData(arr))
+            .then(res => this.listData = this.handleData(res))
         },
-        handleData(arr) {
+        handleData(res) {
           let result = []
-          for (let i = arr.length - 1; i >= 0; i--) {
-            const element = arr[i];
-            const yearValue = '_' + element['year']
+          for (const key in res) {
+            const yearValue = res[key]['year']
             if (result.length > 0) {
               const value = result[0]
-              value[yearValue] = element['data']
-              console.log(value);
+              value[yearValue] = res[key]['data']
             } else {
               result.push({
-                [yearValue]: element['data']
+                [yearValue]: res[key]['data']
               })
             }
           }
-          console.log("result", result);
+          console.log(result);
           return result
         }
       },
