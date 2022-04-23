@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='root'>
+    {{surplusTime}}
+  </div>
+  <script src='https://cdn.bootcss.com/vue/2.5.16/vue.min.js'></script>
+  <script>
+    // https://tool.lu/timestamp/
+    new Vue({
+      el: '#root',
+      data: {
+        value: '',
+        goods:{
+          payExpireTime:'1646721322'
+        },
+        surplusTime:''
+      },
+      mounted() {
+        this.timeSurplus(this.goods.payExpireTime)
+      },
+      methods: {
+        timeSurplus(time) {
+          time = time * 1000;
+          clearInterval(this.timer);
+          const getSurplusTime = function () {
+            const curTime = (new Date()).getTime(),
+              diffTime = parseInt((Number(time) - curTime) / 1000);
+            return {
+              isContinue: curTime <= Number(time),
+              text: curTime <= Number(time) ? `${parseInt(diffTime / 60)}:${diffTime % 60}` : '00:00'
+            };
+          }
+          const info = getSurplusTime();
+          if (info.isContinue) {
+            this.surplusTime = info.text;
+            this.timer = setInterval(() => {
+              const info = getSurplusTime();
+              if (info.isContinue) {
+                this.surplusTime = info.text;
+              } else {
+                clearInterval(this.timer);
+                this.surplusTime = '0:0';
+              }
+            }, 1000);
+          }
+        }
+      },
+    });
+  </script>
+</body>
+
+</html>
