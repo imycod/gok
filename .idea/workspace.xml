@@ -1,5 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f810e0e4-9a3a-49d7-8efc-81526d109b09" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/layout-v240/view-degsin-starter/Menu-Group-Item.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/layout-v240/view-degsin/app-store.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/layout-v240/view-degsin/component-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/layout-v240/view-degsin/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/layout-v240/view-degsin/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/layout-v240/view-degsin/init-vue.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/layout-v240/view-degsin/ios-bug.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/layout-v240/view-degsin/resize-handler.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/layout-v240/view-degsin/result.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/layout-v240/view-degsin/router.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/layout-v240/view-degsin/sidebar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/layout-v240/view-degsin/store.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/layout-v240/view-degsin/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout-v240/app-store.js" beforeDir="false" afterPath="$PROJECT_DIR$/layout-v240/element/app-store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout-v240/component-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/layout-v240/element/component-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout-v240/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/layout-v240/element/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout-v240/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/layout-v240/element/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout-v240/init-vue.js" beforeDir="false" afterPath="$PROJECT_DIR$/layout-v240/element/init-vue.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout-v240/ios-bug.js" beforeDir="false" afterPath="$PROJECT_DIR$/layout-v240/element/ios-bug.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout-v240/resize-handler.js" beforeDir="false" afterPath="$PROJECT_DIR$/layout-v240/element/resize-handler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout-v240/result.png" beforeDir="false" afterPath="$PROJECT_DIR$/layout-v240/element/result.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout-v240/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/layout-v240/element/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout-v240/sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/layout-v240/element/sidebar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout-v240/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/layout-v240/element/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout-v240/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/layout-v240/element/utils.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="293yr6xyPZM6VmQnFOD1FwxVkh1" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="autoscrollToSource" value="true" />
@@ -9,6 +55,43 @@
     <option name="showMembers" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="MTHome" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\31700\Documents\Code\gok\layout-v240\view-degsin-starter" />
+      <recent name="C:\Users\31700\Documents\Code\gok" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\31700\Documents\Code\gok\layout-v240" />
+      <recent name="C:\Users\31700\Documents\Code\gok\layout-v240\element" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f810e0e4-9a3a-49d7-8efc-81526d109b09" name="Changes" comment="" />
+      <created>1652356259922</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1652356259922</updated>
+      <workItem from="1652356261258" duration="3227000" />
+      <workItem from="1652360174507" duration="23000" />
+      <workItem from="1652404006269" duration="28000" />
+      <workItem from="1652404048894" duration="58000" />
+      <workItem from="1652404122779" duration="4000" />
+      <workItem from="1652404151163" duration="8000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>
