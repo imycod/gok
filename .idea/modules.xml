@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../express-kanguan-server/.idea/express-kanguan-server.iml" filepath="$PROJECT_DIR$/../express-kanguan-server/.idea/express-kanguan-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../express-microservices/.idea/express-microservices.iml" filepath="$PROJECT_DIR$/../express-microservices/.idea/express-microservices.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/gok.iml" filepath="$PROJECT_DIR$/.idea/gok.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../vite-kanguan/.idea/vite-kanguan.iml" filepath="$PROJECT_DIR$/../vite-kanguan/.idea/vite-kanguan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../vue-router-start/.idea/vue-router-start.iml" filepath="$PROJECT_DIR$/../vue-router-start/.idea/vue-router-start.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../vue2-vuex3/.idea/vue2-vuex3.iml" filepath="$PROJECT_DIR$/../vue2-vuex3/.idea/vue2-vuex3.iml" />
     </modules>
   </component>
 </project>

@@ -1,0 +1,129 @@
+.main-container {
+    min-height: 100%;
+    transition: margin-left 0.28s;
+    margin-left: var(--sidebar-width);
+    position: relative;
+}
+
+.sidebar-container {
+    transition: width 0.28s;
+    width: 230px !important;
+    background-color: #304156;
+    height: 100%;
+    position: fixed;
+    font-size: 0px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1001;
+    overflow: hidden;
+}
+
+.sidebar-container .horizontal-collapse-transition {
+    transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
+}
+
+.sidebar-container .scrollbar-wrapper {
+    overflow-x: hidden !important;
+}
+
+.sidebar-container .el-scrollbar__bar.is-vertical {
+    right: 0px;
+}
+
+.sidebar-container .el-scrollbar {
+    height: 100%;
+}
+
+.sidebar-container.has-logo .el-scrollbar {
+    height: calc(100% - 50px);
+}
+
+.sidebar-container .is-horizontal {
+    display: none;
+}
+
+.sidebar-container a {
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+/*左侧菜单每一个item项*/
+.sidebar-item-container {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.link-item {
+    height: 40px;
+}
+
+.sidebar-item-container .link-item .h-auto {
+    height: 100%;
+}
+
+.sidebar-item-container .link-item .flex-center {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+}
+
+/* menu --- hover */
+.sidebar-container .submenu-title-noDropdown:hover,
+.sidebar-container .el-submenu__title:hover {
+    background-color: #263445 !important;
+}
+
+
+/* 点击头部左侧按钮 --- 隐藏 */
+.hideSidebar .sidebar-container {
+    width: 54px !important;
+}
+
+.hideSidebar .main-container {
+    margin-left: 54px;
+}
+
+.hideSidebar .submenu-title-noDropdown {
+    padding: 0 !important;
+    position: relative;
+}
+
+.hideSidebar .submenu-title-noDropdown .el-tooltip {
+    padding: 0 !important;
+}
+
+.hideSidebar .submenu-title-noDropdown .el-tooltip .svg-icon {
+    margin-left: 20px;
+}
+
+.hideSidebar .submenu-title-noDropdown .el-tooltip .sub-el-icon {
+    margin-left: 19px;
+}
+
+.hideSidebar .submenu-title-noDropdown h2 {
+    display: none;
+}
+
+.mobile .main-container {
+    margin-left: 0px;
+}
+
+.mobile .sidebar-container {
+    transition: transform 0.28s;
+    width: 210px !important;
+}
+
+.mobile.hideSidebar .sidebar-container {
+    pointer-events: none;
+    transition-duration: 0.3s;
+    transform: translate3d(-210px, 0, 0);
+}
+
+.withoutAnimation .main-container,
+.withoutAnimation .sidebar-container {
+    transition: none;
+}
+

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    body{
+      background-color: #fafafa;
+    }
+    :root {
+        --sidebar-width: 230px;
+    }
+    .bd{
+        border: 1px solid red;
+    }
+  </style>
+  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="./components/sidebar.css">
+</head>
+<body>
+<div id="root">
+  <router-view></router-view>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vuex/3.6.0/vuex.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue-router/3.5.3/vue-router.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+<script src="./store/app.js"></script>
+<script src="./store.js"></script>
+<script src="./utils/ios-bug.js"></script>
+<script src="./utils/resize.js"></script>
+<script src="./utils/index.js"></script>
+<script src="./components/index.js"></script>
+<script src="./router.js"></script>
+<script src="./index.js"></script>
+</body>
+</html>

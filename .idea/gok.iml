@@ -8,5 +8,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="vue2-vuex3" />
+    <orderEntry type="module" module-name="vite-kanguan" />
+    <orderEntry type="module" module-name="express-kanguan-server" />
+    <orderEntry type="module" module-name="express-microservices" />
+    <orderEntry type="module" module-name="vue-router-start" />
   </component>
 </module>
