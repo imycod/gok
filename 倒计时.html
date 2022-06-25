@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #root {
+      background-color: #61b2a7;
+    }
+
+    .hero-circle {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto;
+      position: relative;
+      border: 8px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 1px 8px rgba(34, 34, 34, 0.3), inset 0 1px 8px rgba(34, 34, 34, 0.3);
+    }
+
+    .is-moment .hero-circle {
+      background-color: #61b2a7
+    }
+
+    .is-moment-timezone .hero-circle {
+      background-color: #4e7cad
+    }
+
+    .hero-face {
+      width: 100%;
+      height: 100%
+    }
+
+    .hero-face:after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 12px;
+      height: 12px;
+      margin: -6px 0 0 -6px;
+      background: #fff;
+      border-radius: 6px;
+      content: "";
+      display: block
+    }
+
+    .hero-hour {
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -4px 0 -4px -25%;
+      padding: 4px 0 4px 25%;
+      background: #fff;
+      -ms-transform-origin: 100% 50%;
+      transform-origin: 100% 50%;
+      border-radius: 4px 0 0 4px
+    }
+
+    .hero-minute {
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -40% -3px 0;
+      padding: 40% 3px 0;
+      background: #fff;
+      -ms-transform-origin: 50% 100%;
+      transform-origin: 50% 100%;
+      border-radius: 3px 3px 0 0
+    }
+
+    .hero-second {
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -40% -1px 0 0;
+      padding: 40% 1px 0;
+      background: #fff;
+      -ms-transform-origin: 50% 100%;
+      transform-origin: 50% 100%
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root">
+    <div>
+      {{surplusTime}} <br>
+      {{paymentTime}} <br>
+      {{minute}} <br>
+      {{second}}
+    </div>
+    <div class="hero-circle">
+      <div class="hero-face">
+        <div id="minute" class="hero-minute" :style="`transform: rotate(${minute}deg);`"></div>
+        <div id="second" class="hero-second" :style="`transform: rotate(${second}deg);`"></div>
+      </div>
+    </div>
+  </div>
+  <script src='https://cdn.bootcss.com/vue/2.5.16/vue.min.js'></script>
+  <script>
+    /**
+     * 时间转化器
+     */
+    const timeFormat = (value, formatType, full) => {
+      if (!value) return '';
+      var timestamp = new Date(Number(value))
+      var now = new Date()
+      var Y = timestamp.getFullYear();
+      var M = (timestamp.getMonth() + 1 < 10 ? '0' + (timestamp.getMonth() + 1) : timestamp.getMonth() + 1)
+      var D = (timestamp.getDate() < 10 ? '0' + timestamp.getDate() : timestamp.getDate())
+      var h = (timestamp.getHours() < 10 ? '0' + timestamp.getHours() : timestamp.getHours());
+      var m = (timestamp.getMinutes() < 10 ? '0' + timestamp.getMinutes() : timestamp.getMinutes());
+      var s = (timestamp.getSeconds() < 10 ? '0' + timestamp.getSeconds() : timestamp.getSeconds());
+      var nowY = now.getFullYear();
+      var nowM = (now.getMonth() + 1 < 10 ? '0' + (now.getMonth() + 1) : now.getMonth() + 1)
+      var nowD = (now.getDate() < 10 ? '0' + now.getDate() : now.getDate())
+      var date
+      date = Y + '-' + M + '-' + D + '  ' + h + ':' + m + ':' + s
+
+      if (formatType === 'Y-M-D') {
+        if (full) { // 不区分今日/昨日
+          date = Y + '-' + M + '-' + D
+        } else {
+          if (Y == nowY && M == nowM && D == nowD) {
+            date = '今日'
+          } else if (Y == nowY && M == nowM && D == nowD - 1) {
+            date = '昨日'
+          } else {
+            date = Y + '-' + M + '-' + D
+          }
+        }
+      } else if (formatType === 'Y-M') {
+        date = Y + '-' + M
+      } else if (formatType === 'h-m') {
+        date = h + ':' + m
+      } else if (formatType === 'h-m-s') {
+        date = h + ':' + m + ':' + s
+      } else if (formatType === 'M-D') {
+        date = M + '-' + D
+      } else if (formatType === 'Y-M-D-h-m') {
+        date = Y + '-' + M + '-' + D + '  ' + h + ':' + m
+      } else if (formatType === 'Y/M/D') {
+        date = Y + '/' + M + '/' + D
+      }
+      return date
+    }
+    //参数为对象类型
+    const vm = new Vue({
+      el: "#root",
+      data: {
+        goods: {
+          payExpireTime: '1646802000'
+        },
+        surplusTime: '',
+        paymentTime: '',
+        hour: '',
+        minute: '',
+        second: ''
+      },
+      mounted() {
+        const val=this.goods.payExpireTime
+        this.timeSurplus(val)
+        this.paymentTime = timeFormat(val*1000, 'Y-M-D') + ' ' + timeFormat(val*1000, 'h-m');
+      },
+      methods: {
+        timeSurplus(time) {
+          time = time * 1000;
+          clearInterval(this.timer);
+          const getSurplusTime =()=> {
+            const curTime = (new Date()).getTime(),
+              diffTime = parseInt((Number(time) - curTime) / 1000);
+              this.second=diffTime*6
+              this.minute=(parseInt(diffTime / 60)*10)-(diffTime/10);
+              console.log(parseInt(diffTime / 60)*10);
+              console.log((diffTime/10));
+            return {
+              isContinue: curTime <= Number(time),
+              text: curTime <= Number(time) ? `${parseInt(diffTime / 60)}:${diffTime % 60}` : '00:00'
+            };
+          }
+          const info = getSurplusTime();
+          if (info.isContinue) {
+            this.surplusTime = info.text;
+            this.timer = setInterval(() => {
+              const info = getSurplusTime();
+              if (info.isContinue) {
+                this.surplusTime = info.text;
+              } else {
+                clearInterval(this.timer);
+                this.surplusTime = '0:0';
+              }
+            }, 1000);
+          }
+        }
+      },
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" type="text/css" href="http://unpkg.com/view-design/dist/styles/iview.css">
+  <style>
+      * {
+          margin: 0;
+          padding: 0;
+      }
+
+      body {
+          background-color: #fafafa;
+      }
+
+      li, ul {
+          list-style: none;
+      }
+  </style>
+</head>
+<body>
+<div id="root">
+  <div>
+    <Menu :theme="theme3" active-name="1">
+      <Group title="内容管理">
+        <Item name="1">
+          <Icon type="md-document"/>
+          文章管理
+        </Item>
+        <Item name="2">
+          <Icon type="md-chatbubbles"/>
+          评论管理
+        </Item>
+      </Group>
+      <Group title="统计分析">
+        <Item name="3">
+          <Icon type="md-heart"/>
+          用户留存
+        </Item>
+        <Item name="4">
+          <Icon type="md-leaf"/>
+          流失用户
+        </Item>
+      </Group>
+    </Menu>
+
+    <i-button @click="show">Click me!</i-button>
+    <Modal v-model="visible" title="Welcome">Welcome to ViewUI</Modal>
+  </div>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+<script type="text/javascript" src="http://unpkg.com/view-design/dist/iview.min.js"></script>
+<script>
+const {
+  Menu
+} = iview;
+const {
+  Group,
+  Item
+} = Menu;
+console.log(Menu);
+Vue.component('Menu', Menu);
+Vue.component('Group', Group);
+Vue.component('Item', Item);
+new Vue({
+  el: '#root',
+  data: {
+    visible: false,
+    theme3: 'light'
+  },
+  methods: {
+    show: function () {
+      this.visible = true;
+    }
+  }
+});
+</script>
+</body>
+</html>

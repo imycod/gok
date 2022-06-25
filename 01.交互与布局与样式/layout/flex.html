@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+
+      .btnz {
+          display: flex;
+          justify-content: space-between;
+          padding-bottom: 10px;
+          border-bottom: 1px solid #ddd;
+      }
+
+      .top {
+          font-size: 18px;
+      }
+
+      button {
+          width: 64px;
+          height: 28px;
+          border-radius: 2px;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 14px
+          background: $base;
+          border: 1px solid transparent;
+          color: rgba(255, 255, 255, 1);
+      }
+
+      button:last-child {
+          color: rgba(51, 51, 51, 1);
+          border: 1px solid rgba(233, 233, 233, 1);
+          background: rgba(255, 255, 255, 1);
+          margin-left: 18px
+      }
+
+      .bd {
+          border: 1px solid red !important;
+      }
+
+      .flex {
+          display: flex;
+      }
+
+      .column {
+          flex-direction: column;
+      }
+
+      .center {
+          display: flex;
+          align-items: center;
+          height: 100%;
+      }
+
+      .text-center {
+          text-align: center;
+      }
+
+      .between {
+          display: flex;
+          justify-content: space-between;
+      }
+
+  </style>
+</head>
+<body>
+<div id="root">
+  <div class="btnz center bd">
+    <h4 class="top flex">
+      <div class="l icon">
+        <img src="../img.png" alt="">
+      </div>
+      <div class="r flex column">
+        <span class="title"> 阿松大阿三大啊打阿达阿达</span>
+        <span class="desc">12313131</span>
+      </div>
+    </h4>
+    <button type="default" @click="">关闭</button>
+  </div>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+<script>
+//参数为对象类型
+const vm = new Vue({
+  el: "#root",
+  data: {
+    msg: "hello",
+  }
+});
+</script>
+</body>
+</html>
