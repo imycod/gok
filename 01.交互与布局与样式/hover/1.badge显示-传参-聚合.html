@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      .container {
+          width: 200px;
+          height: 150px;
+      }
+
+      .card {
+          width: 100%;
+          height: 100%;
+          border: 1px solid black;
+          border-radius: 5px;
+      }
+
+      .hover {
+          display: block;
+      }
+
+      .defalut-state,button {
+          display: none;
+      }
+  </style>
+</head>
+<body>
+
+<div id="root">
+  <div class="container" @mouseenter="mouseenter(idx)" @mouseleave="mouseleave(idx)"
+       v-for="(i,idx) in [{is:false},{is:true},{is:false},{is:true}]" :key="idx">
+    {{ hoverIndex }}
+    <card :is-show="i.is" :is-hover="isHover" :index="idx" :hover-index="hoverIndex"></card>
+  </div>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+<script>
+const card = {
+  props: ['isShow', 'isHover', 'index', 'hoverIndex'],
+  template: `
+    <div class="card">
+    {{ index }} - {{hoverIndex}}
+    {{ index == hoverIndex}}
+    <button v-if="isShow" class="" :class="{'hover':(isHover && (index == hoverIndex)),'defalut-state':!isHover}">badge</button>
+    </div>
+  `
+};
+const hover = {
+  mouseenter(i) {
+    this.isHover = true;
+    this.hoverIndex = i;
+  },
+  mouseleave(i) {
+    this.isHover = false;
+    this.hoverIndex = i;
+  },
+};
+//参数为对象类型
+const vm = new Vue({
+  el: "#root",
+  data: {
+    msg: "hello",
+    isHover: false,
+    hoverIndex: ''
+  },
+  components: {
+    card
+  },
+  methods: {
+    ...hover
+  }
+});
+</script>
+</body>
+</html>

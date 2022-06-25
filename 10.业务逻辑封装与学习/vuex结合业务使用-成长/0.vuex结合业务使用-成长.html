@@ -1,0 +1,112 @@
+<link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.4.1/theme-chalk/index.css" rel="stylesheet">
+<style>
+    .bd {
+        border: 1px solid black;
+    }
+
+    .bar {
+        display: flex;
+    }
+
+    .bar > .l {
+        width: 400px;
+        height: 100vh;
+    }
+
+    .bar > .r {
+        flex: 1;
+        height: 100vh;
+    }
+</style>
+<body>
+<div id="root">
+  <router-view></router-view>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vuex/3.6.0/vuex.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue-router/3.4.9/vue-router.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.4.1/index.js"></script>
+<script>
+const growthCourse = { // 成长课模块
+  namespaced: true,
+};
+const store = new Vuex.Store({ // vuex 是个插件
+  modules: {
+    growthCourse
+  },
+});
+
+const GrowthLayout = {
+  template: `
+  <el-container>
+    <el-header>subsidiary</el-header>
+    <el-main>
+        <router-view></router-view>
+    </el-main>
+  </el-container>
+  `
+};
+const GrowthMain = {
+  template: `
+  <div class="bar">
+    <div class="l bd">
+       <router-link tag="li" to="/main/f1">f1</router-link>
+       <router-link tag="li" to="/main/f2">f2</router-link>
+    </div>
+    <div class="r bd">
+       <router-view></router-view>
+    </div>
+  </div>
+`
+};
+const Growths = [
+  {
+    meta: {
+      title: '主视图',
+    },
+    path: '/main',
+    component: GrowthMain,
+    children: [
+      {
+        path: 'f1',
+        component: {
+          template: `
+            <div>f1</div>
+          `
+        }
+      },
+    ]
+  }
+];
+
+
+const routes = [
+  {
+    path: '/',
+    meta: {
+      title: '成长详情',
+    },
+    redirect: '/main/f1',
+    component: GrowthLayout,
+    children: [
+      ...Growths
+    ]
+  }
+];
+const router = new VueRouter({
+  routes
+});
+
+Vue.use(Vuex);
+
+//参数为对象类型
+const vm = new Vue({
+  el: "#root",
+  store,
+  router,
+  data: {
+    msg: "hello",
+  }
+});
+</script>
+

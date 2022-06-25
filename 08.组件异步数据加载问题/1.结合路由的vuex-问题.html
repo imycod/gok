@@ -1,0 +1,107 @@
+<div id="root">
+  <router-view></router-view>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vuex/3.6.0/vuex.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue-router/3.4.9/vue-router.js"></script>
+<script>
+
+
+const store = new Vuex.Store({
+  state: {
+    count: 1,
+    listData: []
+  },
+  actions: {
+    remote({commit}) {
+      setTimeout(()=>{
+        fetch("./simple.json").then(res => res.json()).then(res => commit('setData', {res}));
+      },3000)
+    },
+    inc({commit}) {
+      setTimeout(() => {
+        commit('inc');
+      }, 1000);
+    },
+    dec({commit}) {
+      commit('dec');
+    }
+  },
+  getters: {
+    getData(state) {
+      return state.listData;
+    }
+  },
+  mutations: {
+    setData(state, payload) {
+      state.listData = payload.res;
+    },
+    inc(state) {
+      state.count++;
+    },
+    dec(state) {
+      state.count--;
+    }
+  }
+});
+const Child = {
+  computed: {
+    count() {
+      return store.state.count;
+    },
+    list() {
+      return store.getters.getData;
+    }
+  },
+  template: '<div>Child : {{count}} - {{list}}</div>'
+};
+const Parent = {
+  template: `
+    <div>
+    <h3>Parent</h3>
+    <button @click="asyncPlus">async +</button>
+    <button @click="remote">remote</button>
+    <hr>
+    <Child></Child>
+    </div>
+  `,
+  created() {
+    this.remote();
+  },
+  methods: {
+    asyncPlus() {
+      store.dispatch('inc');
+    },
+    remote() {
+      store.dispatch('remote');
+    }
+  },
+  components: {
+    Child
+  }
+};
+
+const routes = [
+  {
+    path: '/',
+    component:Parent
+  },
+];
+const router = new VueRouter({
+  routes
+});
+
+
+//参数为对象类型
+const vm = new Vue({
+  el: "#root",
+  store,
+  router,
+  data: {
+    msg: "hello",
+  },
+  components: {
+    Parent
+  }
+});
+</script>

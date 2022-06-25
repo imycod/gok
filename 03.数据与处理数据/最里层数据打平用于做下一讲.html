@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+<script>
+let data = [
+  {
+    "flag": true,
+    "chapterId": "250624973637615616",
+    "name": "cjr大纲",
+    "sort": 1,
+    "chapterDetailEntityList": [
+      {
+        "id": "250624973708918784",
+        "flag": false,
+        "name": "第一节",
+        "sort": 1,
+        "teachContentResList": [
+          {
+            "chapterId": "250624973637615616",
+            "chapterDetailId": "250624973708918784",
+            "flag": false,
+            "docId": "0",
+            "videoKey": "",
+            "dataId": "256002914198425600",
+            "typeStr": "",
+            "type": 2,
+            "courseWareType": 0,
+            "imageUrl": "",
+            "typeValue": "",
+            "name": "222",
+            "size": "",
+            "videoTime": "0",
+            "insertTime": "1654568651056",
+            "updateTime": "1654568687786",
+            "publishTime": "1654568685952",
+            "testSubmitFlag": true,
+            "testCorrectFlag": true,
+            "goBackFlag": 0,
+            "partNum": "1",
+            "topicNum": "1",
+            "isParted": "1",
+            "status": 1,
+            "sort": 9,
+            "videoStudyRate": 0,
+            "validDuration": "0"
+          },
+          {
+            "chapterId": "250624973637615616",
+            "chapterDetailId": "250624973708918784",
+            "flag": false,
+            "docId": "0",
+            "videoKey": "",
+            "dataId": "256001758734778368",
+            "typeStr": "",
+            "type": 2,
+            "courseWareType": 0,
+            "imageUrl": "",
+            "typeValue": "",
+            "name": "噜啦啊噜啦啦",
+            "size": "",
+            "videoTime": "0",
+            "insertTime": "1654568375573",
+            "updateTime": "1654568433004",
+            "publishTime": "1654568431138",
+            "testSubmitFlag": true,
+            "testCorrectFlag": true,
+            "goBackFlag": 0,
+            "partNum": "1",
+            "topicNum": "1",
+            "isParted": "1",
+            "status": 1,
+            "sort": 8,
+            "videoStudyRate": 0,
+            "validDuration": "0"
+          },
+          {
+            "chapterId": "250624973637615616",
+            "chapterDetailId": "250624973708918784",
+            "flag": false,
+            "docId": "250676635345616896",
+            "videoKey": "",
+            "dataId": "250676635953725440",
+            "typeStr": "doc",
+            "type": 5,
+            "courseWareType": 6,
+            "imageUrl": "https://test-obs.goktech.cn/202205231653298766296-74052.doc",
+            "typeValue": "",
+            "name": "枚举赋值工具使用文档V1.0_(1).doc",
+            "size": "344031",
+            "videoTime": "0",
+            "insertTime": "1653298767359",
+            "updateTime": "1653302582338",
+            "publishTime": "1653302582102",
+            "testSubmitFlag": false,
+            "testCorrectFlag": false,
+            "goBackFlag": 0,
+            "partNum": "0",
+            "topicNum": "0",
+            "isParted": "1",
+            "status": 1,
+            "sort": 5,
+            "videoStudyRate": 0,
+            "validDuration": "0"
+          },
+          {
+            "chapterId": "250624973637615616",
+            "chapterDetailId": "250624973708918784",
+            "flag": false,
+            "docId": "0",
+            "videoKey": "",
+            "dataId": "250676595495469056",
+            "typeStr": "",
+            "type": 0,
+            "courseWareType": 0,
+            "imageUrl": "",
+            "typeValue": "",
+            "name": "作业-2022-05-23 17:39:09",
+            "size": "",
+            "videoTime": "0",
+            "insertTime": "1653298757718",
+            "updateTime": "1653298846103",
+            "publishTime": "1653298845984",
+            "testSubmitFlag": false,
+            "testCorrectFlag": false,
+            "goBackFlag": 0,
+            "partNum": "0",
+            "topicNum": "0",
+            "isParted": "0",
+            "status": 1,
+            "sort": 4,
+            "videoStudyRate": 0,
+            "validDuration": "0"
+          },
+          {
+            "chapterId": "250624973637615616",
+            "chapterDetailId": "250624973708918784",
+            "flag": true,
+            "docId": "0",
+            "videoKey": "39d111ca23f24712fcead840b87b6e2d",
+            "dataId": "250624973759250432",
+            "typeStr": "mp4",
+            "type": 12,
+            "courseWareType": 0,
+            "imageUrl": "",
+            "typeValue": "",
+            "name": "123.mp4",
+            "size": "175043342",
+            "videoTime": "6465",
+            "insertTime": "1653040232284",
+            "updateTime": "1653286471560",
+            "publishTime": "1653286471326",
+            "testSubmitFlag": false,
+            "testCorrectFlag": false,
+            "goBackFlag": 0,
+            "partNum": "0",
+            "topicNum": "0",
+            "isParted": "0",
+            "status": 1,
+            "sort": 2,
+            "videoStudyRate": 11,
+            "validDuration": "739"
+          },
+          {
+            "chapterId": "250624973637615616",
+            "chapterDetailId": "250624973708918784",
+            "flag": false,
+            "docId": "249591667676676096",
+            "videoKey": "",
+            "dataId": "250624973767639040",
+            "typeStr": "doc",
+            "type": 5,
+            "courseWareType": 6,
+            "imageUrl": "https://test-obs.goktech.cn/202205201653040089910-29803.doc",
+            "typeValue": "",
+            "name": "枚举赋值工具使用文档V1.0_(1).doc",
+            "size": "344031",
+            "videoTime": "0",
+            "insertTime": "1653040090874",
+            "updateTime": "1653286473782",
+            "publishTime": "1653286473305",
+            "testSubmitFlag": false,
+            "testCorrectFlag": false,
+            "goBackFlag": 0,
+            "partNum": "0",
+            "topicNum": "0",
+            "isParted": "1",
+            "status": 1,
+            "sort": 1,
+            "videoStudyRate": 0,
+            "validDuration": "0"
+          }
+        ]
+      },
+      {
+        "id": "2506249737089187841",
+        "name": "第二节",
+        "teachContentResList": [
+          {
+            "chapterId": "250624973637615616",
+            "chapterDetailId": "2506249737089187841",
+            "flag": false,
+            "docId": "0",
+          },
+        ]
+      }
+    ]
+  },
+  {
+    "flag": false,
+    "chapterId": "250678338530770944",
+    "name": "第二张",
+    "sort": 3,
+    "chapterDetailEntityList": [
+      {
+        "id": "250678361754632192",
+        "flag": false,
+        "name": "第一节",
+        "sort": 1,
+        "teachContentResList": []
+      }
+    ]
+  },
+  {
+    "flag": false,
+    "chapterId": "251013436320972800",
+    "name": "爹日章",
+    "sort": 4,
+    "chapterDetailEntityList": []
+  }
+];
+
+function useStuActiveChapterIdByDataId(chapterDetailEntityLis, chapterDetailId) {
+  let currentParentItem = [];
+  for (let i = 0; i < chapterDetailEntityLis.length; i++) {
+    const item = chapterDetailEntityLis[i];
+    currentParentItem = item;
+    const teachContentResList = item?.teachContentResList;
+    let flag = false;
+    if (teachContentResList){
+      for (let j = 0; j < teachContentResList.length; j++) {
+        const array = teachContentResList[j];
+        console.log('array',array);
+        if (array.id === chapterDetailId) {
+          flag = true;
+          break;
+        }
+      }
+    }
+    if (flag) {
+      break;
+    }
+  }
+  return currentParentItem;
+}
+
+console.log(useStuActiveChapterIdByDataId(data, '250624973708918784'));
+var array = ['a', 'b', 'c'];
+
+// array.forEach(function (element) {
+//   if (element === 'a') {
+//     return false;
+//   }
+//   console.log('element', element);
+// });
+
+// for (let i = 0; i < array.length; i++) {
+//   if (array[i] === 'a') {
+//     break;
+//   }
+//   console.log(array[i]);
+// }
+
+</script>
+</body>
+</html>

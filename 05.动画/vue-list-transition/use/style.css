@@ -1,0 +1,9 @@
+li {
+  display: block;
+  width: 200px;
+  padding: 5px 15px;
+  background-color: #F0F0F0;
+  border: 1px solid #EEE;
+  margin: 10px 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+}

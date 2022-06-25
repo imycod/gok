@@ -1,9 +1,10 @@
 <template>
   <div class="aside-tabs">
-    <input type="radio" id="asideTab0" name="tab-control" checked>
-    <input type="radio" id="asideTab1" name="tab-control">
+    <input v-for="i in 2" type="radio" :id="`asideTab`+(i-1)" name="asideTab-control" :checked="activeTab === (i-1)">
     <ul>
-      <li v-for="(tab,idx) in tabList" @click="switchTab({tab,idx})">
+      <li
+          v-for="(tab,idx) in tabList"
+          @click="switchTab({tab,idx})">
         <label
             :for="`asideTab`+idx"
             role="button">
@@ -18,29 +19,44 @@
 </template>
 
 <script>
+import { stuStorage } from '../index.js';
+
 export default {
-  name: "aside-tab",
-  data() {
+  name: 'aside-tab',
+  props: {
+    activeTab: {
+      type: Number,
+      default: 0
+    },
+    tabList: {
+      type: Array,
+      default: () => {
+        return [{
+          name: '章节',
+          path: 'chapter'
+        }, {
+          name: '活动',
+          path: 'activity'
+        }]
+      }
+    }
+  },
+  data () {
     return {
-      tabList: [{
-        name: '章节',
-        path: 'chapter'
-      }, {
-        name: '活动',
-        path: 'activity'
-      }],
+
     };
   },
   methods: {
-    switchTab({tab, idx}) {
-      localStorage.setItem('asideTab', idx);
+    switchTab ({ tab, idx }) {
+      this.$emit('tabClick', idx);
+      stuStorage.set('asideTab', idx);
     }
   }
 };
 </script>
 
 <style lang="stylus" scoped>
-.aside-tabs input[name=tab-control] {
+.aside-tabs input[name=asideTab-control] {
   display: none;
 }
 
@@ -111,6 +127,7 @@ export default {
   position: relative;
   width: 50%;
   transition: all 0.33s cubic-bezier(0.38, 0.8, 0.32, 1.07);
+  top: -6px;
 }
 
 .aside-tabs .slider .indicator {
@@ -124,26 +141,25 @@ export default {
   border-radius: 1px;
 }
 
-.aside-tabs input[name=tab-control]:nth-of-type(1):checked ~ ul > li:nth-child(1) > label {
+.aside-tabs input[name=asideTab-control]:nth-of-type(1):checked ~ ul > li:nth-child(1) > label {
   cursor: default;
   color: $base;
 }
 
-.aside-tabs input[name=tab-control]:nth-of-type(1):checked ~ .slider {
+.aside-tabs input[name=asideTab-control]:nth-of-type(1):checked ~ .slider {
   transform: translateX(0%);
 }
 
-.aside-tabs input[name=tab-control]:nth-of-type(1):checked ~ .content > section:nth-child(1) {
+.aside-tabs input[name=asideTab-control]:nth-of-type(1):checked ~ .content > section:nth-child(1) {
   display: block;
 }
 
-.aside-tabs input[name=tab-control]:nth-of-type(2):checked ~ ul > li:nth-child(2) > label {
+.aside-tabs input[name=asideTab-control]:nth-of-type(2):checked ~ ul > li:nth-child(2) > label {
   cursor: default;
   color: $base;
 }
 
-
-.aside-tabs input[name=tab-control]:nth-of-type(2):checked ~ .slider {
+.aside-tabs input[name=asideTab-control]:nth-of-type(2):checked ~ .slider {
   transform: translateX(100%);
 }
 

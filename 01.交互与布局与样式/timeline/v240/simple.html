@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.7/theme-chalk/index.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./common.css">
+</head>
+
+<body>
+  <div id='root'>
+    <div v-for="(oneVale, index) in listData">
+      <ul class="cards" v-if="true">
+        <div class="item_time_placeholder bd"></div>
+        <li class="item-card" v-for="(secondValue, secondKey, secondIndex) in oneVale">
+          <div v-for="(threeValue,timeStamp,c) in secondValue" :key="threeValue.id">
+            <div class="item_time">{{secondKey}}-{{timeStamp | timeFormat('M-D')}}</div>
+            <ul class="bd">
+              <div v-for="item in threeValue">
+                {{item}}
+              </div>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script src='https://cdn.bootcss.com/vue/2.5.16/vue.min.js'></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.7/index.min.js"></script>
+  <script src="../static/utils.js"></script>
+  <script>
+
+    new Vue({
+      el: '#root',
+      data: {
+        thisYear: '',
+        listData: []
+      },
+      mounted() {
+        this.remoteData()
+        this.thisYear = new Date().getFullYear();
+      },
+      filters: {
+        timeFormat(val, format) {
+          return window.$utils.timeFormat(val, format)
+        }
+      },
+      methods: {
+        remoteData() {
+          fetch("../static/data/simple.json")
+            .then(res => res.json())
+            .then(res => this.listData = res)
+        }
+      },
+    });
+  </script>
+</body>
+
+</html>

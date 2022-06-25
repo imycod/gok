@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      .bd {
+          border: 1px solid black;
+      }
+
+      .container {
+          width: 100px;
+      }
+
+      .card {
+          width: 100%;
+          will-change: transform;
+          transition: transform .4s cubic-bezier(.86, 0, .07, 1)
+      }
+  </style>
+</head>
+<body>
+<div id="root">
+  <button v-on:click="switchType()">Add</button>
+  <div class="bd container">
+    <div ref="wrapper" class="card">
+      <component :is="name" :key="name"></component>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+<script>
+
+
+Vue.component('list-1', {
+  template: `
+    <div class="list-1">
+      <span>list-1</span>
+      <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+      <li>9</li>
+      <li>10</li>
+      </ul>
+   </div>
+`
+});
+Vue.component('list-2', {
+  template: `
+    <div class="list-2">
+      <span>list-2</span>
+      <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+      <li>9</li>
+      <li>10</li>
+      </ul>
+   </div>
+`
+});
+
+const vm = new Vue({
+  el: "#root",
+  methods: {
+    switchType: function () {
+      if (this.name === 'list-1') {
+        this.active = 1;
+        this.name = 'list-2';
+      } else {
+        this.active = 2;
+        this.name = 'list-1';
+      }
+      this.scrollWrapper();
+    },
+    scrollWrapper() {
+      const {wrapper} = this.$refs;
+      const offset = 100 * this.active;
+      console.log(offset);
+      wrapper.style.transform = `translate3d(-${offset}%, 0, 0)`;
+    },
+  },
+  data: function () {
+    return {
+      name: 'list-1',
+    };
+  }
+});
+</script>
+</body>
+</html>
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="root">
+  <div>
+    {{ test }}
+  </div>
+  <component :is="currentComponent" :detail="[1,2,3]"></component>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+<script>
+
+Vue.component('Foo', {
+  props: ['detail'],
+  template: `
+    <div>
+    <span>foo</span>
+    <div>
+      {{ detail }}
+    </div>
+    </div>
+  `
+});
+Vue.component('Bar', {
+  props: ['list'],
+  template: `
+    <div>
+    <span>bar</span>
+    <div>
+      {{ list }}
+    </div>
+    </div>
+  `
+});
+
+const vm = new Vue({
+  el: "#root",
+  data: {
+    test: '111',
+    currentComponent: "Foo",
+  }
+});
+</script>
+</body>
+</html>
