@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 100vh;
+            background: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .looper {
+            position: relative;
+            z-index: 1;
+        }
+
+        .full {
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <button>Hide looping video</button>
+
+    <video class="looper" autoplay muted playsinline>
+        <source src="http://videoampprod.wpengine.com/wp-content/uploads/2020/03/va_particles_test_b.mp4"
+            type="video/mp4">
+    </video>
+    <video class="full" autoplay muted playsinline>
+        <source src="http://videoampprod.wpengine.com/wp-content/uploads/2020/03/va_particles_test.mp4"
+            type="video/mp4">
+    </video>
+    <script>
+        const btn = document.querySelector("button");
+        const looper = document.querySelector(".looper");
+        const full = document.querySelector(".full");
+
+        //listens for when the looping video ends
+        looper.addEventListener("ended", restartVideos);
+
+        function restartVideos() {
+            //restarts the looping video
+            looper.play();
+
+            //sets the full video to time index of 0 and plays it again
+            full.currentTime = 0;
+            full.play();
+        }
+
+        btn.addEventListener("click", function () {
+            //stops listening for loops
+            looper.removeEventListener("ended", restartVideos);
+
+            hideLooper();
+        });
+
+        function hideLooper() {
+            full.loop = false; //enables looping on full video
+            looper.style.display = "none"; //hides the looping video
+            btn.innerText = "Looping video hidden";
+            btn.disabled = true;
+        }
+    </script>
+</body>
+
+</html>

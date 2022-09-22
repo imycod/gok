@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 1.引入animate文件 -->
+    <link rel="stylesheet" href="./animate.min.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .con {
+            background: #f5f3f4;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 800px;
+            margin:auto;
+        }
+
+        .box {
+            width: 150px;
+            height: 150px;
+            margin: 50px;
+            box-shadow: 0 0 5px #ccc;
+            border-radius: 50%;
+            background: #457388;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="con">
+        <div class="box wow fadeInUp" data-wow-duration='1s'></div>
+        <div class="box wow fadeInUp" data-wow-duration='1s' data-wow-delay="0.1s"></div>
+        <div class="box wow fadeInUp" data-wow-duration='1s' data-wow-delay="0.2s"></div>
+        <div class="box wow fadeInUp" data-wow-duration='1s'></div>
+        <div class="box wow fadeInUp" data-wow-duration='1s' data-wow-delay="0.1s"></div>
+        <div class="box wow fadeInUp" data-wow-duration='1s' data-wow-delay="0.2s"></div>
+        <div class="box wow fadeInUp" data-wow-duration='1s'></div>
+        <div class="box wow fadeInUp" data-wow-duration='1s' data-wow-delay="0.1s"></div>
+        <div class="box wow fadeInUp" data-wow-duration='1s' data-wow-delay="0.2s"></div>
+        <div class="box wow fadeInUp" data-wow-duration='1s'></div>
+        <div class="box wow fadeInUp" data-wow-duration='1s' data-wow-delay="0.1s"></div>
+        <div class="box wow fadeInUp" data-wow-duration='1s' data-wow-delay="0.2s"></div>
+        <div class="box wow fadeInUp" data-wow-duration='1s'></div>
+        <div class="box wow fadeInUp" data-wow-duration='1s' data-wow-delay="0.1s"></div>
+        <div class="box wow fadeInUp" data-wow-duration='1s' data-wow-delay="0.2s"></div>
+        <div class="box wow fadeInUp" data-wow-duration='1s'></div>
+        <div class="box wow fadeInUp" data-wow-duration='1s' data-wow-delay="0.1s"></div>
+        <div class="box wow fadeInUp" data-wow-duration='1s' data-wow-delay="0.2s"></div>
+    </div>
+    <script src="./wow.min.js"></script>
+    <script>
+        // 2.初始化
+        // 如果不为ie6-9的浏览器，则进行一个初始化
+        if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))) {
+            new WOW().init();
+        };
+    </script>
+</body>
+
+</html>

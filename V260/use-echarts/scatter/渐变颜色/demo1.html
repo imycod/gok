@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bd {
+            border: 1px solid red;
+        }
+
+        .bubbles {
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <div id="bubbles" style="width: 600px; height:300px" class="bubbles bd"></div>
+    </div>
+    <script src='https://cdn.bootcss.com/vue/2.5.16/vue.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/echarts/5.3.3/echarts.min.js'
+        integrity='sha512-2L0h0GhoIHQEjti/1KwfjcbyaTHy+hPPhE1o5wTCmviYcPO/TD9oZvUxFQtWvBkCSTIpt+fjsx1CCx6ekb51gw=='
+        crossorigin='anonymous'></script>
+    <script src="./demo1.js"></script>
+    <script>
+        new Vue({
+            el: '#root',
+            data() {
+                return {
+
+                }
+            },
+            mounted() {
+                draw()
+            },
+            computed: {
+
+            },
+            methods: {
+
+            },
+            components: {
+
+            },
+        })
+    </script>
+</body>
+
+</html>

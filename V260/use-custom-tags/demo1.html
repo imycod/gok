@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #root {}
+
+        .tags {
+            width: 300px;
+            height: 250px;
+
+            border: 1px solid #000;
+
+            word-wrap: break-word;
+            overflow: hidden;
+            height: 120px;
+        }
+
+        .item {
+            border: 1px solid #000;
+            
+            display: inline-block;
+            background: #F6F6FD !important;
+            border-radius: 4px 4px 4px 4px;
+            height: 32px;
+            line-height: 32px;
+            margin-right: 20px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            font-family: PingFang SC-Medium, PingFang SC;
+            font-weight: 500;
+            color: #3734A9;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <div class="tags">
+            <span class="item" v-for="(item,index) in tags" :key="index">{{item}}</span>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    tags: [
+                        '卡建设靠大家',
+                        '卡建设',
+                        '卡建设',
+                        '卡建设卡建卡建建卡建卡', // ten words
+                        '卡建设',
+                        '卡建设',
+                        '卡建设卡建卡建建卡建卡', // ten words
+                        '卡建设',
+                        '卡建设',
+                        '卡建设卡建卡建建卡建卡', // ten words
+                        '卡建设',
+                        '卡建设',
+                        '卡建设卡建卡建建卡建卡', // ten words
+                        '卡建设',
+                    ]
+                }
+            },
+            mounted() {
+                this.init()
+            },
+            methods: {
+                init() {
+
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>

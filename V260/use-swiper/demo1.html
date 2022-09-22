@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    <style>
+        .bd {
+            border: 1px solid black;
+        }
+
+        .swiper {
+            margin-top: 50px;
+            width: 100%;
+        }
+
+        .tarans {
+            display: flex;
+        }
+
+        .item {
+            margin-left: 42px;
+            width: 330px;
+            height: 448px;
+            background: #FFFFFF;
+            box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.08);
+            border-radius: 4px 4px 4px 4px;
+        }
+
+        .item:first-child {
+            margin-left: 127px;
+        }
+
+        .swiper-scrollbar {
+            width: 100px;
+            height: 20px;
+            background-color: red;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+        参考：
+            https://www.swiper.com.cn/api/index.html
+            https://www.swiper.com.cn/api/start/new.html
+            https://swiperjs.com/demos
+            https://blog.csdn.net/weixin_44989721/article/details/125769962
+     -->
+    <div id="root">
+        <div class="swiper bd">
+            <div class="swiper-wrapper tarans">
+                <div class="swiper-slide item" v-for="(item,index) in list" :key="index">slider1</div>
+            </div>
+            <div class="swiper-scrollbar"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.x.x/js/swiper.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        /**
+         *  1. 必须先要有数据，数据是传入时，需要在父级v-if，确保数据有在初始化
+         *  2. es6模块时，确保main.js 引入swiper.min.css而非cdn
+         *  3. 一个页面多个swiper时，需要看swiper版本，按照版本指定的类名做一个区分比如： swiper-container1 swiper-container2...
+         */
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    swiper: null,
+                    list: [  
+                        {},
+                        {},
+                        {},
+                        {},
+                        {},
+                        {},
+                    ]
+                }
+            },
+            mounted() {
+                this.$nextTick(() => {
+                    this.initSwiper()
+                });
+            },
+            methods: {
+                initSwiper() {
+                    this.swiper = new Swiper('.swiper', {
+                        // autoplay: true,//可选选项，自动滑动
+                        slidesPerView: 4,
+                        spaceBetween: 30,
+                        centeredSlides: true,
+                        scrollbar: {
+                            el: ".swiper-scrollbar",
+                            hide: true,
+                        },
+                    })
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>

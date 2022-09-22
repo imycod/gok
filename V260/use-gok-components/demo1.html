@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet/less" href="./demo1.less">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/less.js/4.1.3/less.min.js'
+        integrity='sha512-6gUGqd/zBCrEKbJqPI7iINc61jlOfH5A+SluY15IkNO1o4qP1DEYjQBewTB4l0U4ihXZdupg8Mb77VxqE+37dg=='
+        crossorigin='anonymous'></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/iview/3.5.4/styles/iview.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="root">
+        <!-- <div>
+            <ul>
+                <li v-for="(item,index) in list" :key="index">
+                    <div>{{item.name}}</div>
+                    <span v-for="(citem,cindex) in item.airline" :key="cindex">{{citem}}</span>
+                </li>
+            </ul>
+        </div> -->
+        <div class="list">
+            <my-page :params.sync="params" :callBack="getProjectList" :dataList.sync="list" ref="page">
+                <div class="product-card cp hvr-shadow" v-for="(item,index) in list" :key="index">
+                    <div class="left">
+                        <!-- TODO:  补 -->
+                        <div class="card-title">
+                            项目标题项目标题项目标题人项目标题项目标题项目标题人项目标题项目标题项目标题人项目标题项目标目标题项目标题项目标题人项目标题项目标题项目标题人项目标题项目标题项目标题人项目标题项目标题项目标题题项目标题人
+                        </div>
+                        <div class="about">
+                            研究团队长期致队队长期致队长期致队长期致队长期致队长期致队长期致队长期致队长期致长队长期致期致队长期致力于蓄电池物联网监测、智能电网继电保护、新能源接入、设备状态无线监控、恶劣环境下物联网技术等研究。团队目前拥有发明专利8项、实用新型近70余项。团队目前发表专著3部，论文100多篇（其中EI、SCI检索30余篇）。团队获得的奖励包括：四川省科技进步3等奖1项、四川省电力建设科技进步奖3项等。
+                        </div>
+                    </div>
+                    <div class="right">
+                        <!-- TODO: 图片 -->
+                        <img src="" alt="">
+                    </div>
+                </div>
+            </my-page>
+        </div>
+    </div>
+
+    <script src='https://cdn.bootcss.com/vue/2.5.16/vue.min.js'></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/iview/3.5.4/iview.min.js"></script>
+
+    <script type="text/x-template" id="my-page">
+        <div class="page-wrapper">
+            {{callBack}}
+            <slot> </slot>
+            <Page
+              :total="total"
+              size="small"
+              :page-size="20"
+              :style="`margin-top:${marginTop}px`"
+              @on-change="change"
+              @on-prev ="change"
+              @on-next ="change"
+            />
+          </div>		
+    </script>
+
+    <script>
+        Vue.component('my-page', {
+            template: '#my-page',
+            props: {
+                marginTop: {
+                    default: 20
+                },
+                // 回调函数
+                callBack: {
+                    default: () => {
+                        // console.log('回调搜索函数');
+                    },
+                    require: true
+                },
+                // params 必带pageNo、pageSize
+                params: {
+                    require: true,
+                    default: () => {
+                        return {
+                            pageNo: 1,
+                            pageSize: 20
+                        }
+
+                    }
+                },
+                // 数据列表 双向改变
+                dataList: {
+                    require: true,
+                    type: Array,
+                    default: () => {
+                        return []
+                    }
+                }
+            },
+            data() {
+                return {
+                    total: 100,
+                    isLoading: false,
+                    pageParams: {
+                        pageNo: 0,
+                        pageSize: 20
+                    }
+                }
+            },
+            methods: {
+                async change(Number) {
+                    console.log(Number);
+                    await this.handleLoader(Number)
+                },
+                /**
+                 * @description: 开始加载数据
+                 * @return {*}
+                 */
+                async handleLoader(Number = 1) {
+                    const oldPageNo = this.pageParams.pageNo
+                    if (this.isLoading) {
+                        return
+                    }
+
+                    this.isLoading = true
+                    let newDataList = []
+                    try {
+                        this.pageParams.pageNo = Number
+                        Object.assign(this.params, this.pageParams)
+                        const data =
+                            await this.callBack(
+                                this.params
+                            )
+                        if (!data) {
+                            console.error(
+                                '返回值为空！,请检查该函数'
+                            )
+                        }
+                        // console.log(this.callBack(this.params));
+                        // 开始做拼接
+                        this.total = data.total
+
+                        newDataList = [].concat(
+                            data?.list
+                        )
+                    } catch (error) {
+                        console.error(error)
+                        // newDataList = this.dataList
+                    }
+                    // 暴露数据响应
+                    this.$emit(
+                        'update:dataList',
+                        newDataList
+                    )
+                    this.$emit(
+                        'update:params',
+                        this.params
+                    )
+                    this.$emit('total', this.total)
+                    this.isLoading = false
+                }
+            }
+        });
+
+
+        async function project(params) {
+            console.log('params---',params)
+            const response = await fetch('https://api.instantwebtools.net/v1/passenger?page=0&size=10')
+            return response.json()
+        }
+
+
+        new Vue({
+            el: '#root',
+            data() {
+                return {
+                    params: {  // 当前分页
+                        current: 0, // 当前分类
+                    },
+                    list: [],
+                }
+            },
+            async  created() {
+                // this.getProjectList()
+            },
+            async mounted(){
+                await  this.$refs.page.handleLoader()
+            },
+            methods: {
+                async getProjectList(params) {
+                    console.log('params---',params);
+                    const res = await project(params)
+                    this.list = res.data
+                    console.log("res------>", res);
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>

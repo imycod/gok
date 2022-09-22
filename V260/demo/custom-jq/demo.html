@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            position: fixed;
+            z-index: 11;
+            visibility: hidden;
+            transition: all linear 0.3s;
+        }
+        .red{
+            background-color: red;
+        }
+        .blue{
+            background-color: blueviolet;
+        }
+        .is_active{
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <div class="box red">1</div>
+    <div class="box blue">2</div>
+    <!-- <script src="./jq-all.js"></script> -->
+    <script src="./jq-witout-ajax.js"></script>
+    <script>
+        $(function () {
+            $('.box').eq(0).addClass('is_active')
+            $('.box').eq(1).addClass('is_active')
+        })
+    </script>
+</body>
+</html>

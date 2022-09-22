@@ -1,0 +1,14 @@
+@width: 1920; //设计稿的宽度
+@height: 1080; //设计稿的高度
+@design_font_size: 12;
+
+.px2rem(@key, @px) {
+    @{key}: (@px/@design_font_size) * 1rem;
+}
+
+
+#root{
+    .bubbles {
+        .px2rem(height, 200);
+    }
+}

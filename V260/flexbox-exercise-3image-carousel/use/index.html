@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet/less" href="./index.less">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/less.js/4.1.3/less.min.js'
+        integrity='sha512-6gUGqd/zBCrEKbJqPI7iINc61jlOfH5A+SluY15IkNO1o4qP1DEYjQBewTB4l0U4ihXZdupg8Mb77VxqE+37dg=='
+        crossorigin='anonymous'></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css'
+        integrity='sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw=='
+        crossorigin='anonymous' />
+    <!-- <link rel="stylesheet" href="./index.css"> -->
+</head>
+
+<body>
+    <div id="root">
+        <div class="container" v-for="(num,index) in 2" :key="index">
+            <h2>Section {{index+1}}</h2>
+            <carousel :key="index"></carousel>
+        </div>
+    </div>
+    <script src='https://cdn.bootcss.com/vue/2.5.16/vue.min.js'></script>
+    <script src='https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js'
+        integrity='sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g=='
+        crossorigin='anonymous'></script>
+    <script>
+        let carousel = {
+            props: ['index'],
+            template: `
+                <div class="carousel">
+                    <div class="carousel__nav">
+                        <span id="moveLeft" class="carousel__arrow">
+                            <svg class="carousel__icon" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"></path>
+                            </svg>
+                        </span>
+                        <span id="moveRight" class="carousel__arrow">
+                            <svg class="carousel__icon" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"></path>
+                            </svg>
+                        </span>
+                    </div>
+                    <div :class="'carousel-item carousel-item--'+(index+1)" v-for="(item,index) in list" :key="index">
+                        <div class="carousel-item__image"></div>
+                        <div class="carousel-item__info">
+                            <div class="carousel-item__container">
+                                <h2 class="carousel-item__subtitle">{{item.ths}}</h2>
+                                <h1 class="carousel-item__title">{{item.title}}</h1>
+                                <p class="carousel-item__description">{{item.subs}}</p>
+                                <a href="#" class="carousel-item__btn">{{item.script}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `,
+            data() {
+                return {
+                    list: [
+                        {
+                            ths: 'Beach',
+                            title: 'The beach',
+                            subs: 'Sed ut perspiciatis unde omnis iste natus error sit <br/>voluptatem<br/>accusantium doloremque laudantium, totam rem aperiam.',
+                            script: 'Explore the beach',
+                        },
+                        {
+                            ths: 'Beach',
+                            title: 'The beach',
+                            subs: 'Sed ut perspiciatis unde omnis iste natus error sit <br/>voluptatem<br/>accusantium doloremque laudantium, totam rem aperiam.',
+                            script: 'Explore the beach',
+                        },
+                        {
+                            ths: 'Beach',
+                            title: 'The beach',
+                            subs: 'Sed ut perspiciatis unde omnis iste natus error sit <br/>voluptatem<br/>accusantium doloremque laudantium, totam rem aperiam.',
+                            script: 'Explore the beach',
+                        },
+                        {
+                            ths: 'Beach',
+                            title: 'The beach',
+                            subs: 'Sed ut perspiciatis unde omnis iste natus error sit <br/>voluptatem<br/>accusantium doloremque laudantium, totam rem aperiam.',
+                            script: 'Explore the beach',
+                        },
+                    ]
+                }
+            },
+            mounted() {
+                console.log($('.carousel-item'));
+                $('.carousel-item').eq(0).addClass('active');
+                var total = $('.carousel-item').length;
+                var current = 0;
+                $('#moveRight').on('click', function () {
+                    var next = current;
+                    current = current + 1;
+                    setSlide(next, current);
+                });
+                $('#moveLeft').on('click', function () {
+                    var prev = current;
+                    current = current - 1;
+                    setSlide(prev, current);
+                });
+                function setSlide(prev, next) {
+                    var slide = current;
+                    if (next > total - 1) {
+                        slide = 0;
+                        current = 0;
+                    }
+                    if (next < 0) {
+                        slide = total - 1;
+                        current = total - 1;
+                    }
+                    $('.carousel-item').eq(prev).removeClass('active');
+                    $('.carousel-item').eq(slide).addClass('active');
+                    setTimeout(function () {
+
+                    }, 800);
+
+
+
+                    console.log('current ' + current);
+                    console.log('prev ' + prev);
+                }
+            },
+        }
+
+
+    </script>
+
+    <script src="./index.js"></script>
+</body>
+
+</html>

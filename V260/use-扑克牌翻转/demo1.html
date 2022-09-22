@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* entire container, keeps perspective */
+        .flip-container {
+            perspective: 1000;
+            width: 100px;
+            height: 300px;
+            border: 1px solid red;
+        }
+
+        /* flip the pane when hovered */
+        .flip-container:hover .flipper,
+        .flip-container.hover .flipper {
+            transform: rotateY(180deg);
+        }
+
+        .flip-container,
+        .front,
+        .back {
+            width: 320px;
+            height: 480px;
+        }
+
+        /* flip speed goes here */
+        .flipper {
+            transition: 0.6s;
+            transform-style: preserve-3d;
+
+            position: relative;
+        }
+
+        /* hide back of pane during swap */
+        .front,
+        .back {
+            backface-visibility: hidden;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* front pane, placed above back */
+        .front {
+            z-index: 2;
+        }
+
+        /* back, initially hidden pane */
+        .back {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+        参考：
+            https://www.webhek.com/post/css-flip/
+     -->
+    <div class="flip-container">
+        <div class="flipper">
+            <div class="front">
+                <!-- 前面内容 -->
+                前面内容
+            </div>
+            <div class="back">
+                <!-- 背面内容 -->
+                背面内容
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    background-color: rgb(33, 33, 33);
+}
+
+.planets-container {
+    width: 150px;
+    height: 150px;
+    background-color: yellow;
+    border-radius: 50%;
+    transform: scaleX(5);
+}
+
+.planet {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: red;
+    transform: scaleX(0.2);
+}
+
+
+#first-planet {
+    background-color: blue;
+}
+
+
+.route {
+    width: 100%;
+    height: 100%;
+    /* 1 */
+    animation: rotate 12s infinite linear;
+
+    position: absolute;
+}
+
+/* 2 */
+@keyframes rotate {
+    0% {
+        transform: rotateZ(0deg);
+        transform: rotateX(0deg);
+    }
+
+    100% {
+        transform: rotateZ(360deg);
+        transform: rotateX(360deg);
+    }
+}
+
+.planet-container {
+    animation: correct 12s infinite linear;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+}
+
+@keyframes correct {
+    0% {
+        transform: rotateZ(360deg);
+        transform: rotateY(360deg);
+    }
+
+    100% {
+        transform: rotateZ(0deg);
+        transform: rotateY(0deg);
+    }
+}

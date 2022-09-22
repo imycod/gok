@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="./animate.min.css"> -->
+    <style>
+        #root {
+            text-align: center;
+        }
+
+        p {
+            text-align: left;
+        }
+
+        .paragraph {
+            width: 100%;
+            height: 500px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <i-section :item="item" v-for="(item,index) in list" :key="index"></i-section>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- <script src="./wow.min.js"></script> -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/3.3.6/scrollreveal.min.js'></script>
+    <script>
+        const sr = ScrollReveal();
+        Vue.directive('scroll-reveal-container', {
+            inserted(el, binding) {
+                const value = binding.value || {};
+
+                console.log(el.childNodes);
+                const options = {
+                    reset: true,
+                    origin: 'bottom',
+                    duration: 500,
+                    distance: '150%',
+                    // delay: 0,
+                    // rotate: { x: 0, y: 0, z: 0 },
+                    opacity: 0,
+                    // scale: 2,
+                    easing: 'ease-in-out',
+                }
+                sr.reveal(el.childNodes, options, value.sequenceDelay);
+            }
+        });
+
+        const section = {
+            props: ['item'],
+            template: `
+            <div class="paragraph" >
+                <div  v-scroll-reveal-container="scrollRevealOptions">
+                    <h3 class="bd">{{item.name}}</h3>
+                </div>
+                <p>{{item.content}}</p>
+            </div>
+            `,
+            computed: {
+                scrollRevealOptions() {
+                    return {
+                        sequenceDelay: 100
+                    };
+                },
+            },
+        }
+
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    list: [
+                        {
+                            name: '这个是一个title',
+                            content: '这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本。'
+                        },
+                        {
+                            name: '这个是一个title',
+                            content: '这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本。'
+                        },
+                        {
+                            name: '这个是一个title',
+                            content: '这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本。'
+                        },
+                        {
+                            name: '这个是一个title1',
+                            content: '这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本。'
+                        },
+                        {
+                            name: '这个是一个title2',
+                            content: '这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本。'
+                        },
+                        {
+                            name: '这个是一个title3',
+                            content: '这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本，这个是一个文本。'
+                        },
+
+                    ]
+                }
+            },
+            mounted() {
+                this.init()
+            },
+            components: {
+                'i-section': section,
+            },
+            methods: {
+                init() {
+
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>
