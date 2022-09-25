@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #root {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bd {
+            border: 1px solid black;
+        }
+
+        /* 这里的swiper-container宽高必须跟image盒子的一致 */
+        .swiper-container {
+            width: 525px;
+            height: 350px;
+            position: relative;
+            overflow: hidden;
+            transition-timing-function: linear !important;
+        }
+
+        .swiper-wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            z-index: 1;
+            position: relative;
+        }
+        .slider-item {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            opacity: 0;
+            background: linear-gradient(270deg, #f7f9ff 0%, #f2f6ff 100%);
+            cursor: -webkit-grab;
+            cursor: grab;
+        }
+      
+
+        .img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <link rel="stylesheet" href="./demo1.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.2/swiper-bundle.min.css'
+        integrity='sha512-+i36IwpzfYLmCNRFtEnpEAie8PEyhO5GuK7W2Y0eDMVwT1pesCB86xuQlc5v1lfb69N/6hejJEW3EWeVkExTlQ=='
+        crossorigin='anonymous' />
+</head>
+
+<body>
+    <div id="root">
+
+
+        <div class="swiper-container swiper-no-swiping">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide  bd" v-for="(url,idx) in list[0].imgUrls" :key="idx">
+                    <img class="img" v-image-err="url" alt="">
+                </div>
+            </div>
+        </div>
+
+        <!-- <div :class="`carousel-item carousel-item--${index+1}`" @click="handleClick(item)"
+            v-for="(item,index) in list" :key="item.id">
+            <div class="swiper-container swiper-no-swiping bd">
+                <div class="swiper-wrapper bd">
+                    <div class="swiper-slide" v-for="(url,idx) in item.imgUrls" :key="idx">
+                        <img class="img" v-image-err="url" alt="">
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- <div class="carousel bd">
+            <div class="carousel__nav">
+                <span class="dot cp" v-for="(item,index) in list" :key="index" @click="handleDot(index)"></span>
+            </div>
+            <div :class="`carousel-item carousel-item--${index+1} cp`" @click="handleClick(item)"
+                v-for="(item,index) in list" :key="item.id">
+                <div class="swiper-container bd carousel-item__image">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" v-for="(url,idx) in item.imgUrls" :key="idx">
+                            <img class="img" v-image-err="url" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item__info ">
+                    <div class="carousel-item__container">
+                        <h1 class="carousel-item__title">{{ item.name }}</h1>
+                        <p class="carousel-item__description">{{ item.remark }}</p>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src='https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.js"></script>
+    <script src="./directives/imageErr.js"></script>
+    <script src="./directives/index.js"></script>
+    <script>
+        const loaderDirectives = Vue => {
+            Object.keys(directive).forEach(key => {
+                Vue.directive(key, directive[key])
+            })
+        }
+        loaderDirectives(Vue)
+
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    swiper: null,
+                    list: [
+                        {
+                            name: '这是一个标题1',
+                            remark: '这是一段文本，这是一段文本，这是一段文本',
+                            imgUrls: [
+                                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0A/0C/ChMkJlwbaPmIfjr8AAHXNlQ9tyQAAt5PAMXql0AAddO522.jpg',
+                                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0A/0C/ChMkJlwbaNiIEOrBAANO47FQFTQAAt5PACZR9IAA077939.jpg',
+                                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0A/0C/ChMkJlwbaNuISTO4AAVLv_pX4ZgAAt5PADutU8ABUvX676.jpg',
+                                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0A/0C/ChMkJlwbaOGIWC6cAATBLOpmkPUAAt5PAF0I2sABMFE622.jpg',
+                            ],
+                        },
+                        {
+                            name: '这是一个标题2',
+                            remark: '这是一段文本，这是一段文本，这是一段文本',
+                            imgUrls: [
+                                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0A/0C/ChMkJ1wbaPmIKsu2AAVzC61gPjoAAt5PAMwa-UABXMj111.jpg',
+                                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0A/0C/ChMkJ1wbaP2IMT7eAAWgTTEpa3IAAt5PANeWN4ABaBl710.jpg',
+                                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g2/M00/0B/06/ChMlWV5e_LKIMfXAABFMSTn-iMYAANjFQGl9kcAEUxh933.jpg',
+                                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g2/M00/0B/06/ChMlWl5e_LyIQQxYAATN2PZeAlwAANjFQPWp9QABM3w866.jpg',
+                            ],
+                        },
+                        {
+                            name: '这是一个标题3',
+                            remark: '这是一段文本，这是一段文本，这是一段文本',
+                            imgUrls: [
+                                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0A/0C/ChMkJlwbaOSIcp-JAATAyUkNcIAAAt5PAHGnv4ABMDh633.jpg',
+                                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0A/0C/ChMkJ1wbby2IJofOAAO6oacXAp8AAt5QgFpwXMAA7q5347.jpg',
+                                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0A/0C/ChMkJ1wbaO-ICmVpAAeZlh6xqSgAAt5PAJ0n3cAB5mu952.jpg',
+                                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0A/0C/ChMkJlwbaPWIeTdWAAfERdv4lxAAAt5PALAGLkAB8Rd818.jpg',
+                            ],
+                        },
+                    ]
+                }
+            },
+            mounted() {
+                this.initDom()
+                this.initSwiper()
+            },
+            methods: {
+                handleDot(index) {
+                    // dom7 尽量不要用这个依赖，因为在首页和当前组件公用的是swiper，所以引用此可以正常执行
+                    $(".carousel-item").each((idx, dom) => $(dom).removeClass('active'))
+                    $(".dot").each((idx, dom) => $(dom).removeClass('dot__active'))
+                    $(".carousel-item").eq(index).addClass("active");
+                    $(".dot").eq(index).addClass("dot__active");
+                },
+                handleClick(item) {
+                    // todo... 点击合作成果案例要干啥？
+
+                },
+                initDom() {
+                    $(".carousel-item").eq(0).addClass("active");
+                    $(".dot").eq(0).addClass("dot__active");
+                },
+                initSwiper() {
+                    this.swiper = new Swiper('.swiper-container', {
+                        speed: 1000, //匀速时间
+                        loop: true,
+                        autoplay: {
+                            delay: 0,
+                            stopOnLastSlide: false,
+                            disableOnInteraction: false
+                        },
+                        loopAdditionalSlides: 1,
+                    })
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>

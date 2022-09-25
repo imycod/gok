@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .title {
+            color: #fff;
+            z-index: 570;
+            position: absolute;
+            text-align: center;
+            left: 50%;
+            top: 30%;
+            transform: translate(-50%, -30%);
+            font-size: 24px;
+
+        }
+
+        p,
+        h2 {
+            margin: 0px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        .wrapper {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .video {
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            z-index: -10;
+            width: 100%;
+            top: -100px;
+            left: 0px;
+            right: 0px;
+        }
+
+        .is_active {
+            position: absolute;
+            z-index: 555;
+            left: 0px;
+            right: 0px;
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <div class="wrapper">
+            <div class="title">
+                <h2>这是一个标题</h2>
+                <p>这是一段文本这是一段文本这是一段文本这是一段文本</p>
+            </div>
+            <video ref="video" class="video" autoplay muted>
+                <source src="landingIntro-desktop.mp4" type="video/mp4">
+            </video>
+            <video class="video" autoplay loop muted>
+                <source src="landingLoop-desktop.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="cutImg" id="cutImage" v-if="imgShow">
+            <span class="closeImg" @click="closeCutImg">X</span> //删除按钮
+        </div>
+        <button @click="trigger">抠图</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js'></script>
+    <script>
+        function cutout(canvas, color, range = 0) {
+            let context = canvas.getContext('2d');
+            let imageInfo = context.getImageData(0, 0, canvas.width, canvas.height);
+            let pixiArr = imageInfo.data;
+
+            for (let row = 0; row < canvas.height; row++) {
+                let left = row * 4 * canvas.width;
+                let right = left + 4 * canvas.width - 1 - 3;
+                let leftF = false;
+                let rightF = false;
+
+                while (!leftF || !rightF) {
+                    if (!leftF) {
+                        if (testColor([pixiArr[left], pixiArr[left + 1], pixiArr[left + 2]], color, range)) {
+                            pixiArr[left + 3] = 0;
+                            left += 4;
+                        } else leftF = true;
+                    }
+                    if (!rightF) {
+                        if (testColor([pixiArr[right], pixiArr[right + 1], pixiArr[right + 2]], color, range)) {
+                            pixiArr[right + 3] = 0;
+                            right -= 4;
+                        } else rightF = true;
+                    }
+
+                    if (left == right) {
+                        leftF = true;
+                        rightF = true;
+                    };
+                }
+            }
+
+            // 同理进行列扫描
+            for (let col = 0; col < canvas.width; col++) {
+                let top = col * 4; // 指向列头
+                let bottom = top + (canvas.height - 2) * canvas.width * 4 + canvas.width * 4; // 指向列尾
+                let topF = false;
+                let bottomF = false;
+
+                while (!topF || !bottomF) {
+                    if (!topF) {
+                        if (testColor([pixiArr[top], pixiArr[top + 1], pixiArr[top + 2]], color, range)) {
+                            pixiArr[top + 3] = 0;
+                            top += canvas.width * 4;
+                        } else topF = true;
+                    }
+                    if (!bottomF) {
+                        if (testColor([pixiArr[bottom], pixiArr[bottom + 1], pixiArr[bottom + 2]], color, range)) {
+                            pixiArr[bottom + 3] = 0;
+                            bottom -= canvas.width * 4;
+                        } else bottomF = true;
+                    }
+
+                    if (top == bottom) {
+                        topF = true;
+                        bottomF = true;
+                    };
+                }
+            }
+
+            context.putImageData(imageInfo, 0, 0);
+        }
+        function testColor(current, target, range) {
+            for (let i = 0; i < 3; i++) {
+                if (!((1 - range) * target[i] <= current[i] && (1 + range) * target[i] >= current[i])) return false;
+            }
+
+            return true;
+        }
+
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    imgShow: true,
+                }
+            },
+            mounted() {
+                this.play()
+            },
+            methods: {
+                play() {
+                    $('.video').eq(0).addClass('is_active')
+                    $('.video').eq(0).on('ended', (_) => {
+                        $('.video').eq(0).removeClass('is_active')
+                        $('.video').eq(1).addClass('is_active')
+                    })
+                },
+                trigger() {
+                    this.imgShow = true
+                    var player = document.querySelector('.is_active');   //获取video的Dom节点
+                    var canvas = document.createElement("canvas");
+                    var img = document.createElement("img");
+                    canvas.width = player.clientWidth;
+                    canvas.height = player.clientHeight;
+                    const ctx = canvas.getContext("2d")
+                    ctx.drawImage(player, 0, 0, canvas.width, canvas.height);//截
+                    cutout(canvas, [255, 255, 255], 0.2); // 对白色进行抠除，容差为0.2
+                    var dataURL = canvas.toDataURL("image/png");  //将图片转成base64格式
+                    img.src = dataURL;
+                    img.width = player.clientWidth - 200;   //控制截出来的图片宽的大小
+                    img.height = player.clientHeight - 200; //控制截出来的图片高的大小
+                    img.style.border = "1px solid #333333"   //控制截出来的图片边框的样式
+                    document.getElementById("cutImage").appendChild(img);   //显示在页面中
+                    this.downFile(dataURL, "图片.jpg");   //下载截图
+                },
+                downFile(data, fileName) {
+                    var save_link = document.createElementNS(
+                        "http://www.w3.org/1999/xhtml",
+                        "a"
+                    ); //有效的内部空间URI
+                    save_link.href = data;
+                    save_link.download = fileName;
+                    var event = document.createEvent("MouseEvents");
+                    event.initMouseEvent(
+                        "click",
+                        true,
+                        false,
+                        window,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        false,
+                        false,
+                        false,
+                        false,
+                        0,
+                        null
+                    );
+                    save_link.dispatchEvent(event);
+                },
+                closeCutImg() {
+                    this.imgShow = false
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

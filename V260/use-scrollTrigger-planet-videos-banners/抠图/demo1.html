@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body style="backgournd:#000">
+
+<canvas id="myCanvas" width="300" height="150" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+<script>
+var c=document.getElementById("myCanvas");
+var ctx=c.getContext("2d");
+  ctx.fillStyle="black";
+ctx.fillRect(0,0,300,150);
+ctx.fillStyle="#F00";
+ctx.fillRect(10,10,50,50);
+
+function koutu()
+{
+  const imgData = ctx.getImageData(0, 0, 300, 150)
+  for (let i = 0; i < imgData.data.length / 4; i++) {
+    let r = imgData.data[i * 4 + 0]
+    let g = imgData.data[i * 4 + 1]
+    let b = imgData.data[i * 4 + 2]
+
+    if (r >= 255 && g >= 0 && b >= 0) {
+      imgData.data[i * 4 + 3] = 0 // 通过把 Alpha 值设为 0 , 来使像素透明
+    }
+  }
+  ctx.putImageData(imgData, 0, 0)
+
+}
+</script>
+
+<button onclick="koutu()">抠图</button>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .bd{
+      border: 1px solid black;
+    }
+
+    body {
+      height: 100vh;
+      background-color: #DA68CF;
+      display: grid;
+      place-items: center;      
+      font-family: 'Fjalla One', sans-serif;
+    }
+
+    .container {
+      position: relative;
+      perspective: 1000;
+      transition: transform 500ms ease-out;
+      transform-style: preserve-3d;
+
+    }
+
+    .container:hover {
+      transform: rotatey(180deg);
+    }
+
+    .front,
+    .rear {
+      height: 450px;
+      width: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      backface-visibility: hidden;
+    }
+
+    .front {
+      background-color: #fff;
+      background-size: cover;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      transform-style: preserve-3d;
+    }
+
+    .front h1,
+    .rear h1 {
+      font-weight: 800;
+      font-size: 5rem;
+      text-transform: uppercase;
+      color: black;
+      text-align: center;
+      transform: translateZ(120px);
+    }
+
+    .rear span {
+      display: block;
+      font-size: 7rem;
+    }
+
+    .front h2 {
+      text-transform: uppercase;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .9);
+      letter-spacing: 2px;
+      transform: translateZ(80px);
+    }
+
+    .rear {
+      background-image: linear-gradient(135deg, rgba(93, 179, 255, 1), rgba(75, 24, 236, 1), rgba(255, 120, 238, 1));
+      transform: rotateY(180deg);
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      transform-style: preserve-3d;
+    }

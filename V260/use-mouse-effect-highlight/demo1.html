@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .nav {
+            display: flex;
+        }
+
+        .item {
+            width: 100px;
+            height: 50px;
+            border: 1px solid #fff;
+            line-height: 50px;
+            text-align: center;
+            color: #fff;
+            background: #0D7CFF;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <div class="nav">
+            <div v-for="(item,index) in list" :style="{'background':item.background}" @mouseout="mouseleave(index)" @mousemove="(e)=>mousemove(e,index)" class="item">
+                {{item.title}}
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    list: [
+                        {
+                            title: '这是一个标题',
+                            background: "",
+                        },
+                        {
+                            title: '这是一个标题',
+                            background: "",
+                        },
+                        {
+                            title: '这是一个标题',
+                            background: "",
+                        },
+                        {
+                            title: '这是一个标题',
+                            background: "",
+                        },
+                    ],
+                }
+            },
+            mounted() {
+
+            },
+            methods: {
+                mousemove(target, index) {
+                    const offsetX = target.offsetX
+                    const offsetY = target.offsetY                                                            
+                    this.list[index].background = `radial-gradient(circle at ${offsetX}px ${offsetY}px,rgb(16, 106, 197) 0%,rgba(16, 106, 197,0) calc(0% + 100px)) no-repeat border-box border-box rgba(255,255,255,0.1)`
+                },
+                mouseleave(index){
+                    this.list[index].background = ""
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .bd {
+      border: 1px solid black;
+    }
+
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+
+    .container .content {
+      box-sizing: border-box;
+      padding-top: 60px;
+      width: calc(1248px);
+      margin: 0 auto;
+      height: 100%;
+    }
+
+    .container .content .item-content {
+      margin-top: 48px;
+      display: flex;
+    }
+
+    .container .content .item-content .item {
+      margin-left: 30px;
+      width: 284px;
+      height: 360px;
+      overflow: hidden;
+      background: #F7F8FC;
+      border-radius: 2px 2px 2px 2px;
+    }
+
+    .container .content .item-content .item .front {
+      position: relative;
+    }
+
+    .container .content .item-content .item .front .title {
+      bottom: 27px;
+      position: absolute;
+      transition: all 0.4s;
+    }
+
+    .container .content .item-content .item .front h3 {
+      margin-top: 33px;
+    }
+
+    .container .content .item-content .item .back {
+      position: relative;
+    }
+
+    .container .content .item-content .item .back .title {
+      top: 27px;
+      position: absolute;
+    }
+
+    .container .content .item-content .item .back .title h3 {
+      color: #133DB5;
+    }
+
+    .container .content .item-content .item .back .title p {
+      width: 200px;
+      display: inline-block;
+      margin-top: 8px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .container .content .item-content .item .img {
+      width: 221px;
+      height: 183px;
+      transition: all 0.4s;
+    }
+
+    .container .content .item-content .item h3 {
+      text-align: center;
+      font-size: 22px;
+      font-family: PingFang SC-Bold, PingFang SC;
+      font-weight: bold;
+      color: #333333;
+    }
+
+    .container .content .item-content .item:first-child {
+      margin-left: 0px;
+    }
+
+    .container .content .item-content .flip-container {
+      perspective: 1000;
+    }
+
+    .container .content .item-content .flip-container:hover .flipper,
+    .container .content .item-content .flip-container.hover .flipper {
+      transform: rotateY(180deg);
+    }
+
+    /* flip speed goes here */
+    .container .content .item-content .flipper {
+      transition: 0.6s;
+      transform-style: preserve-3d !important;
+      position: relative !important;
+      perspective: 1000 !important;
+      height: 100%;
+    }
+
+    /* hide back of pane during swap */
+    .container .content .item-content .front,
+    .container .content .item-content .back {
+      backface-visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    /* front pane, placed above back */
+    .container .content .item-content .front {
+      z-index: 2;
+      transform-style: preserve-3d;
+
+    }
+
+    /* back, initially hidden pane */
+    .container .content .item-content .back {
+      transform: rotateY(180deg);
+      /* background: #F7F8FC; */
+    }
+
+    .front,
+    .back {
+      backface-visibility: hidden !important;
+    }
+
+    .flip-container:hover .front .img {
+      bottom: 50px;
+    }
+
+    .flip-container:hover .front .title {
+      top: 27px !important;
+    }
+
+    .front .title {
+      transform: translateZ(-120px) !important;
+    }
+
+    .front .img {
+      transform: translateZ(120px) !important;
+      position: absolute;
+      bottom: 100px;
+    }
+
+    .flip-container:hover .front .img {
+      bottom: 0px;
+    }
+
+    .flip-container:hover .back .title {
+      top: 27px !important;
+    }
+
+    .flip-container:hover .back .title {
+      transform: translateZ(-120px) !important;
+    }
+
+    .flip-container:hover .back .img {
+      transform: translateZ(120px) !important;
+      position: absolute;
+      bottom: 100px;
+    }
+
+
+    .back {
+      transform-style: preserve-3d !important;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container" class="container flex-center">
+    <div class="content">
+      <div class="top" v-scrollReveal>
+        <h3>平台服务</h3>
+        <p>Platform service</p>
+      </div>
+      <div class="item-content">
+        <div class="item flip-container bd cp hvr-shadow" v-for="(item,index) in list" :key="index">
+          <div class="flipper">
+            <div class="back h-full w-full">
+              <div class="title ">
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.subs }}</p>
+              </div>
+              <!-- <img class="img" :src="`./section-2-${index+1}.png`"> -->
+            </div>
+            <div class="front bd  h-full w-full">
+              <img class="img" :src="`./section-2-${index+1}.png`">
+              <div class="title">
+                <h3>{{ item.title }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+  <script>
+    const list = Object.freeze([
+      {
+        title: "校企对接",
+        subs: "一句话文案一句话文案一句话文案一句话文案",
+      }, {
+        title: "教学云平台",
+        subs: "一句话文案一句话文案一句话文案一句话文案",
+      }, {
+        title: "产教融合大数据",
+        subs: "一句话文案一句话文案一句话文案一句话文案",
+      }, {
+        title: "新闻资讯",
+        subs: "一句话文案一句话文案一句话文案一句话文案",
+      }
+    ]);
+
+    const vm = new Vue({
+      el: '#container',
+      data() {
+        return {
+          list,
+        };
+      },
+      computed: {
+
+      },
+      methods: {
+
+      }
+    })
+  </script>
+</body>
+
+</html>
