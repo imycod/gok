@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Swiper demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+
+
+  <style>
+    .bd {
+      border: 1px solid red;
+    }
+
+    #root {
+      width: 100%;
+      height: calc(48px + 18px + 496px - 70px);
+      margin-top: 51px;
+    }
+
+    .content {
+      width: calc(525px + 32px + 543px);
+      height: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      overflow: hidden;
+    }
+
+    html,
+    body {
+      position: relative;
+      height: 100%;
+    }
+
+    body {
+      background: #eee;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+
+    .subs {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .img-wraper {
+      width: 50%;
+      overflow: hidden;
+      display: flex;
+      border: 1px solid black;
+    }
+
+    .img {
+      /* width: 50%; */
+    }
+
+    .swiper-pagination-bullets {
+      position: absolute;
+      left: -400px !important;
+
+    }
+
+    .swiper-pagination-bullet {
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      line-height: 20px;
+      font-size: 12px;
+      color: #000;
+      opacity: 1;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .swiper-pagination-bullet-active {
+      color: #fff;
+      background: #007aff;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root">
+    <div class="content">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" v-for="(item,index) in list" :key="index">
+            <div class="subs">
+              <h3>{{item.name}}</h3>
+              <p>{{item.remark}}</p>
+            </div>
+            <div class="img-wraper">
+              <img class="img" v-for="(url,idx) in item.imgUrls" :src="url" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+  <script>
+
+    const vm = new Vue({
+      el: '#root',
+      data() {
+        return {
+          swiper: null,
+          list: [
+            {
+              name: '这是一个标题1',
+              remark: '这是一段文本，这是一段文本，这是一段文本',
+              imgUrls: [
+                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0A/0C/ChMkJlwbaPmIfjr8AAHXNlQ9tyQAAt5PAMXql0AAddO522.jpg',
+                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0A/0C/ChMkJlwbaNiIEOrBAANO47FQFTQAAt5PACZR9IAA077939.jpg',
+                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0A/0C/ChMkJlwbaNuISTO4AAVLv_pX4ZgAAt5PADutU8ABUvX676.jpg',
+                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0A/0C/ChMkJlwbaOGIWC6cAATBLOpmkPUAAt5PAF0I2sABMFE622.jpg',
+              ],
+            },
+            {
+              name: '这是一个标题2',
+              remark: '这是一段文本，这是一段文本，这是一段文本',
+              imgUrls: [
+                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0A/0C/ChMkJ1wbaPmIKsu2AAVzC61gPjoAAt5PAMwa-UABXMj111.jpg',
+                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0A/0C/ChMkJ1wbaP2IMT7eAAWgTTEpa3IAAt5PANeWN4ABaBl710.jpg',
+                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g2/M00/0B/06/ChMlWV5e_LKIMfXAABFMSTn-iMYAANjFQGl9kcAEUxh933.jpg',
+                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g2/M00/0B/06/ChMlWl5e_LyIQQxYAATN2PZeAlwAANjFQPWp9QABM3w866.jpg',
+              ],
+            },
+            {
+              name: '这是一个标题3',
+              remark: '这是一段文本，这是一段文本，这是一段文本',
+              imgUrls: [
+                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0A/0C/ChMkJlwbaOSIcp-JAATAyUkNcIAAAt5PAHGnv4ABMDh633.jpg',
+                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0A/0C/ChMkJ1wbby2IJofOAAO6oacXAp8AAt5QgFpwXMAA7q5347.jpg',
+                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0A/0C/ChMkJ1wbaO-ICmVpAAeZlh6xqSgAAt5PAJ0n3cAB5mu952.jpg',
+                'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0A/0C/ChMkJlwbaPWIeTdWAAfERdv4lxAAAt5PALAGLkAB8Rd818.jpg',
+              ],
+            },
+          ]
+        }
+      },
+      mounted() {
+        this.initSwiper() // 必须先要确保数据加载后，再渲染swiper
+      },
+      methods: {
+        initSwiper() {
+          var swiper = new Swiper('.swiper-container', {
+            loop: true,
+            autoplay: true,
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+              renderBullet: function (index, className) {
+                return '<span class="' + className + '">' + (index + 1) + '</span>';
+              },
+            },
+          });
+        },
+      }
+    })
+  </script>
+</body>
+
+</html>

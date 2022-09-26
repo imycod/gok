@@ -86,7 +86,7 @@
             },
             mounted() {
                 this.$nextTick(() => {
-                    this.initSwiper()
+                    this.initSwiper() // 必须先要确保数据加载后，再渲染swiper
                 });
             },
             methods: {

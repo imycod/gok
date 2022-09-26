@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Swiper Slider with Scrollbar </title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css'>
+  <link rel="stylesheet" href="./style.css">
+  <style>
+    .bd {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root">
+    <div class="slider">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" v-for="_ in 10">
+            <img
+              src="https://images.pexels.com/photos/4060569/pexels-photo-4060569.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+              alt="">
+          </div>
+        </div>
+        <!-- scrollbar -->
+        <div class="swiper-scrollbar"></div>
+      </div>
+    </div>
+  </div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.8.4/swiper-bundle.min.js'></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="./script.js"></script>
+  <script>
+    new Vue({
+      el: '#root',
+      data() {
+        return {
+
+        }
+      },
+      mounted() {
+        this.init()
+      },
+      methods: {
+        init() {
+          var $swiperSelector = $('.swiper-container');
+          $swiperSelector.each(function (index) {
+            var $this = $(this);
+            $this.addClass('swiper-slider-' + index);
+            var dragSize = $this.data('drag-size') ? $this.data('drag-size') : 100;
+            var freeMode = $this.data('free-mode') ? $this.data('free-mode') : false;
+            var loop = $this.data('loop') ? $this.data('loop') : false;
+            var slidesDesktop = $this.data('slides-desktop') ? $this.data('slides-desktop') : 4;
+            var slidesTablet = $this.data('slides-tablet') ? $this.data('slides-tablet') : 3;
+            var slidesMobile = $this.data('slides-mobile') ? $this.data('slides-mobile') : 2.5;
+            var spaceBetween = $this.data('space-between') ? $this.data('space-between') : 20;
+            var watchOverflow = $this.data('watch-overflow') ? $this.data('watch-overflow') : true;
+
+            console.log(dragSize,freeMode,watchOverflow,spaceBetween);
+            var swiper = new Swiper('.swiper-slider-' + index, {
+              direction: 'horizontal',
+              loop: loop,
+              freeMode: freeMode,
+              watchOverflow: watchOverflow,
+              spaceBetween: spaceBetween,
+              breakpoints: {
+                1920: {
+                  slidesPerView: slidesDesktop
+                },
+                992: {
+                  slidesPerView: slidesTablet
+                },
+                480: {
+                  slidesPerView: slidesMobile
+                }
+              },
+              scrollbar: {
+                el: '.swiper-scrollbar',
+                draggable: true,
+                dragSize: dragSize
+              }
+            });
+          });
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>
