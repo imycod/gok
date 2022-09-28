@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .bd {
+      border: 1px solid black;
+    }
+
+
+    .flip-container {
+      perspective: 1000;
+      margin-left: 30px;
+      width: 284px;
+      height: 360px;
+      overflow: hidden;
+      background: #F7F8FC;
+      border-radius: 2px 2px 2px 2px;
+    }
+
+
+    .flipper {
+      transition: 0.6s;
+      transform-style: preserve-3d !important;
+      position: relative !important;
+      perspective: 1000 !important;
+      height: 100%;
+    }
+
+    .front,
+    .back {
+      backface-visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      position: relative;
+    }
+
+    .front {
+      z-index: 2;
+      transform-style: preserve-3d;
+    }
+
+    .back {
+      transform: rotateY(180deg);
+      transform-style: preserve-3d !important;
+      height: 100%;
+      border: 1px solid black;
+    }
+
+    /* .front,
+    .back {
+      backface-visibility: hidden !important;
+    } */
+
+    .flip-container:hover .img {
+      bottom: -20px;
+      width: 301px;
+      height: 263px;
+      /* zoom: 1.5; */
+    }
+
+
+    .flip-container:hover .flipper,
+    .flip-container.hover .flipper {
+      transform: rotateY(180deg);
+    }
+
+
+    .img {
+      transform: translateZ(120px) !important;
+      position: absolute;
+      bottom: 100px;
+      width: 221px;
+      height: 183px;
+      transition: all 0.4s;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container" class="container bd">
+    <div class="flip-container bd" v-for="(item,index) in list" :key="index">
+      <div class="flipper">
+        <div class="back"></div>
+        <div class="front bd">
+          <img class="img" :src="`./section-2-${index+1}.png`">
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+  <script>
+    const list = Object.freeze([
+      {
+        title: "校企对接",
+        subs: "一句话文案一句话文案一句话文案一句话文案",
+      }, {
+        title: "教学云平台",
+        subs: "一句话文案一句话文案一句话文案一句话文案",
+      }, {
+        title: "产教融合大数据",
+        subs: "一句话文案一句话文案一句话文案一句话文案",
+      }, {
+        title: "新闻资讯",
+        subs: "一句话文案一句话文案一句话文案一句话文案",
+      }
+    ]);
+
+    const vm = new Vue({
+      el: '#container',
+      data() {
+        return {
+          list,
+        };
+      },
+      computed: {
+
+      },
+      methods: {
+
+      }
+    })
+  </script>
+</body>
+
+</html>
